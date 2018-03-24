@@ -11,6 +11,7 @@ name: textMusic
 
 file_extensions:
   - tm
+  - tml
 scope: source.textMusic
 
 contexts:
@@ -25,15 +26,15 @@ contexts:
   main:
 
     - include: trackAndFunction
-    - include: constants
+    - include: strings
     - include: invalid
 
-  constants:
+  strings:
     - match: '\{'
       scope: keyword.control.textMusic
       push: 
         - include: square_bracket
-        - include: constants
+        - include: strings
         #这里的递归是为了处理{}的多重性。
 
         - match: '\}'
@@ -46,16 +47,16 @@ contexts:
     - match: \[
       scope: keyword.control.textMusic
       push: 
-        - include: inter-constant
+        - include: inter-string
         - match: \]
           scope: keyword.control.textMusic
           pop: true
-    - include: inter-constant
+    - include: inter-string
     - match: \]|\)
     #这我就只好另写了,因为不能包含}
       scope: invalid.illegal.textMusic
 
-  inter-constant:
+  inter-string:
       - match: \|
         scope: keyword.control.textMusic
       - match: \w|,|-|#|%|:|\+|;|=|&|\*|\$
@@ -110,7 +111,7 @@ contexts:
           scope: keyword.control.textMusic
           #暂定允许这一个符号
         - match: \w
-          scope: constant.other.textMusic
+          scope: string.other.textMusic
 
 
   quote:
@@ -118,7 +119,7 @@ contexts:
       scope: keyword.control.textMusic
       push:
         - match: '\w*'
-          scope: constant.other.textMusic
+          scope: test.textMusic
         - match: '\s|$\n?'
           pop: true
     - match: \!
@@ -142,14 +143,14 @@ contexts:
   function:
     #这里面原本有一个bracket集成匹配模块，合并了,有需要再拆开。
     - match: '[a-zA-Z0-9]*(?=\()'
-      scope: constant.other.textMusic
-      #不允许下划线命名。这样不需要主constant中加入新的stack。nice！
+      scope: string.other.textMusic
+      #不允许下划线命名。这样不需要主string中加入新的stack。nice！
       #不过其余的地方我还是允许了的。
     - match: '\('
       scope: keyword.control.textMusic
       push:
         - match: '[a-zA-Z]*'
-          scope: constant.other.textMusic
+          scope: string.other.textMusic
           #颜色选取最先匹配的模式
         - match: '[0-9\.\-]*'
           scope: variable.function.textMusic

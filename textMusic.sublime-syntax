@@ -6,163 +6,235 @@
 ###到时候再看一遍那个scope文档，多用meta和Markup这种正常标记语言常用的scope
 ###2018-3-24：我觉得不一定gg，最多是没有办法发布到package control上。
 
-
-name: textMusic
+name: Thulium Music
 
 file_extensions:
   - tm
   - tml
-scope: source.textMusic
+
+scope: source.Thulium
 
 contexts:
 
-  prototype:
-    - include: repeat
-    - include: comments
-    - include: quote
-    - include: function
-    - include: instrument
-
   main:
 
-    - include: trackAndFunction
-    - include: strings
-    - include: invalid
+    - include: comment
+    - include: command
+    - include: track
 
-  strings:
-    - match: '\{'
-      scope: keyword.control.textMusic
-      push: 
-        - include: square_bracket
-        - include: strings
-        #这里的递归是为了处理{}的多重性。
-
-        - match: '\}'
-          scope: keyword.control.textMusic
+  comment:
+    - match: ^//
+      scope: mark.comment.Thulium
+      push:
+        - match: -{2,}
+          scope: mark.comment.Thulium
+        - match: '[^\-]+(?=-{2,})'
+          scope: infomation.comment
+        - match: '$\n'
           pop: true
-    - include: square_bracket
 
-  square_bracket:
-      #这里面要求了[不要有{}]否则要另行处理。若果你们要新增的语法就再修改。
-    - match: \[
-      scope: keyword.control.textMusic
-      push: 
-        - include: inter-string
-        - match: \]
-          scope: keyword.control.textMusic
+  command:
+    - match: ^#
+      scope: mark.command.Thulium
+      push: command.general
+
+  command.general:
+    - match: End
+      scope: keyword.command.Thulium
+    - match: Include
+      scope: keyword.command.Thulium
+      push:
+        - match: <.*>
+          scope: keyword.command.Thulium
           pop: true
-    - include: inter-string
-    - match: \]|\)
-    #这我就只好另写了,因为不能包含}
-      scope: invalid.illegal.textMusic
+    - match: Chord
+      scope: keyword.command.Thulium
+      push:
+        - match: ^[a-zA-Z]
+          scope: pitchdop.note.Thulium
+        - match: \t+([^\t]+\t+)?
+          scope: description.comment.Thulium
+        - include: library.chord
+          pop: true
+    - match: Function
+      scope: keyword.command.Thulium
+      push: library.function
+    - match: Track
+      scope: keyword.command.Thulium
+    - match: $\n
+      pop: true
 
-  inter-string:
-      - match: \|
-        scope: keyword.control.textMusic
-      - match: \w|,|-|#|%|:|\+|;|=|&|\*|\$
-        scope: variable.function.textMusic
-      - match: \^|'|\.
-        scope: constant.language.textMusic
-        #上面两组是主体非分隔符的配色设置，再说。
-
-
-
-
-  repeat:
-    - match: '(\[\d\.\])|(:\|\|)|(\\\d\:)|(\d\*)|\|\|\:'
-      scope: variable.parameter.textMusic
-
-  trackAndFunction:
+  library.function:
+    - include: Packages/JavaScript/JavaScript.sublime-syntax
     - match: '^#'
-      push: 
-        - meta_scope: entity.name.function.constructor.textMusic
-        - match: 'Function'
-        #你们这个不写function的话不太容易处理，那我就。。。默认为绿色吧！
-          push: Packages/JavaScript/JavaScript.sublime-syntax
-          with_prototype:
-            - match: '^#'
-            #这个#为什么能用两遍。。。
+      scope: mark.command.Thulium
+      pop: true
+
+  library.chord:
+    - match: \[
+      scope: bracket.note.Thulium
+      push:
+        - include: number.integer
+        - match: ';'
+          scope: bracket.note.Thulium
+        - match: \]
+          scope: bracket.note.Thulium
+          pop: true
+    - include: number.integer
+    - match: ','
+      scope: bracket.note.Thulium 
+
+  number.integer:
+    - match: '[+\-]'
+      scope: bracket.note.Thulium
+    - match: \d+(\.\d+)?
+      scope: degree.note.Thulium
+
+  number.percentage:
+    - match: '%'
+      scope: bracket.note.Thulium
+    - match: \d+(\.\d+)?
+      scope: degree.note.Thulium
+
+  track:
+    - match: <\*?
+      scope: mark.command.Thulium
+      push:
+        - match: '[a-zA-Z]\w*(?=[*:])'
+          scope: mark.command.Thulium
+        - match: '[:,]'
+          scope: mark.command.Thulium
+        - match: '[a-zA-Z]\w*(?!:)'
+          scope: mark.command.Thulium
+        - match: \(
+          scope: mark.command.Thulium
+          push: 
+            - include: number.percentage
+            - match: \)
+              scope: mark.command.Thulium
               pop: true
-        - match: $\n?
+        - match: \*?>
+          scope: mark.command.Thulium
           pop: true
+    - include: track.general
 
-  instrument:
-    - match: '<\*'
-      scope: keyword.control.textMusic
-      push:
-        - include: inter-instrument
-        - match: '\*>|$\n?'
-          scope: keyword.control.textMusic
-          pop: true
-    - match: '<'
-      scope: keyword.control.textMusic
-      push:
-        - include: inter-instrument
-        - match: '\*'
-          scope: invalid.illegal.textMusic
-          #施大神你是怎么一眼看出来这个错误提示的实现的！
-        - match: '\>|$\n?'
-          scope: keyword.control.textMusic
-          pop: true
+  # strings:
+  #   - match: '\{'
+  #     scope: keyword.control.textMusic
+  #     push: 
+  #       - include: square_bracket
+  #       - include: strings
+  #       #这里的递归是为了处理{}的多重性。
 
-  inter-instrument:
-        - include: function
-        - match: ','
-          scope: keyword.control.textMusic
-          #暂定允许这一个符号
-        - match: \w
-          scope: string.other.textMusic
+  #       - match: '\}'
+  #         scope: keyword.control.textMusic
+  #         pop: true
+  #   - include: square_bracket
+
+  # square_bracket:
+  #     #这里面要求了[不要有{}]否则要另行处理。若果你们要新增的语法就再修改。
+  #   - match: \[
+  #     scope: keyword.control.textMusic
+  #     push: 
+  #       - include: inter-string
+  #       - match: \]
+  #         scope: keyword.control.textMusic
+  #         pop: true
+  #   - include: inter-string
+  #   - match: \]|\)
+  #   #这我就只好另写了,因为不能包含}
+  #     scope: invalid.illegal.textMusic
+
+  # inter-string:
+  #     - match: \|
+  #       scope: keyword.control.textMusic
+  #     - match: \w|,|-|#|%|:|\+|;|=|&|\*|\$
+  #       scope: variable.function.textMusic
+  #     - match: \^|'|\.
+  #       scope: constant.language.textMusic
+  #       #上面两组是主体非分隔符的配色设置，再说。
+
+  # repeat:
+  #   - match: '(\[\d\.\])|(:\|\|)|(\\\d\:)|(\d\*)|\|\|\:'
+  #     scope: variable.parameter.textMusic
+
+  # instrument:
+  #   - match: '<\*'
+  #     scope: keyword.control.textMusic
+  #     push:
+  #       - include: inter-instrument
+  #       - match: '\*>|$\n?'
+  #         scope: keyword.control.textMusic
+  #         pop: true
+  #   - match: '<'
+  #     scope: keyword.control.textMusic
+  #     push:
+  #       - include: inter-instrument
+  #       - match: '\*'
+  #         scope: invalid.illegal.textMusic
+  #         #施大神你是怎么一眼看出来这个错误提示的实现的！
+  #       - match: '\>|$\n?'
+  #         scope: keyword.control.textMusic
+  #         pop: true
+
+  # inter-instrument:
+  #       - include: function
+  #       - match: ','
+  #         scope: keyword.control.textMusic
+  #         #暂定允许这一个符号
+  #       - match: \w
+  #         scope: string.other.textMusic
 
 
-  quote:
-    - match: '@'
-      scope: keyword.control.textMusic
-      push:
-        - match: '\w*'
-          scope: test.textMusic
-        - match: '\s|$\n?'
-          pop: true
-    - match: \!
-    #这个！和@差不多，但是@不知道是不是只接函数名？
-      scope: keyword.control.textMusic
+  # quote:
+  #   - match: '@'
+  #     scope: keyword.control.textMusic
+  #     push:
+  #       - match: '\w*'
+  #         scope: test.textMusic
+  #       - match: '\s|$\n?'
+  #         pop: true
+  #   - match: \!
+  #   #这个！和@差不多，但是@不知道是不是只接函数名？
+  #     scope: keyword.control.textMusic
 
 
-  comments:
-    - match: '//'
-      scope: punctuation.definition.comment.textMusic
-      push:
-        - meta_scope: comment.line.double-slash.textMusic
-        - match: '[^-]*(?=-+)'
-          scope: entity.other.inherited-class.textMusic
-        - match: $\n?
-          pop: true
-    - match: '\t[^\t]*\t'
-    #答应我，不要再用这种奇怪的语法好吗。
-      scope: comment.line.double-dash.textMusic
+  # comments:
+  #   - match: '//'
+  #     scope: punctuation.definition.comment.textMusic
+  #     push:
+  #       - meta_scope: comment.line.double-slash.textMusic
+  #       - match: '[^-]*(?=-+)'
+  #         scope: entity.other.inherited-class.textMusic
+  #       - match: $\n?
+  #         pop: true
+  #   - match: '\t[^\t]*\t'
+  #   #答应我，不要再用这种奇怪的语法好吗。
+  #     scope: comment.line.double-dash.textMusic
 
-  function:
-    #这里面原本有一个bracket集成匹配模块，合并了,有需要再拆开。
-    - match: '[a-zA-Z0-9]*(?=\()'
-      scope: string.other.textMusic
-      #不允许下划线命名。这样不需要主string中加入新的stack。nice！
-      #不过其余的地方我还是允许了的。
-    - match: '\('
-      scope: keyword.control.textMusic
-      push:
-        - match: '[a-zA-Z]*'
-          scope: string.other.textMusic
-          #颜色选取最先匹配的模式
-        - match: '[0-9\.\-]*'
-          scope: variable.function.textMusic
-        - match: '[^0-9\.\-\s\)]'
-          #括号里面文本的配色和主体有所不同，不建议写成keyword形式。
-          scope: keyword.other.textMusic
-        - match: '\)|$\n?'
-          scope: keyword.control.textMusic
-          pop: true
+  # function:
+  #   #这里面原本有一个bracket集成匹配模块，合并了,有需要再拆开。
+  #   - match: '[a-zA-Z0-9]*(?=\()'
+  #     scope: string.other.textMusic
+  #     #不允许下划线命名。这样不需要主string中加入新的stack。nice！
+  #     #不过其余的地方我还是允许了的。
+  #   - match: '\('
+  #     scope: keyword.control.textMusic
+  #     push:
+  #       - match: '[a-zA-Z]*'
+  #         scope: string.other.textMusic
+  #         #颜色选取最先匹配的模式
+  #       - match: '[0-9\.\-]*'
+  #         scope: variable.function.textMusic
+  #       - match: '[^0-9\.\-\s\)]'
+  #         #括号里面文本的配色和主体有所不同，不建议写成keyword形式。
+  #         scope: keyword.other.textMusic
+  #       - match: '\)|$\n?'
+  #         scope: keyword.control.textMusic
+  #         pop: true
 
-  invalid:
-    - match: '>|\)|\}|\]'
-    #编写说明：配合push效果拔群！
-    #你们说>单独可以是重音提示。。。这个会在哪里使用？
-      scope: invalid.illegal.textMusic
+  # invalid:
+  #   - match: '>|\)|\}|\]'
+  #   #编写说明：配合push效果拔群！
+  #   #你们说>单独可以是重音提示。。。这个会在哪里使用？
+  #     scope: invalid.illegal.textMusic

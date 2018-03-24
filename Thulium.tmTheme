@@ -586,17 +586,102 @@
 				<string>#F83333</string>
 			</dict>
 		</dict>
+
+		<!--Thulium Music Style Sheet-->
+
+		<!--  Note  -->
+
 		<dict>
-		    <key>name</key>
-		    <string>Test</string>
-		    <key>scope</key>
-		    <string>test</string>
-		    <key>settings</key>
-		    <dict>
-		        <key>foreground</key>
-		        <string>#66CCFF</string>
-		    </dict>
+			<key>scope</key>
+			<string>degree.note</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#66DDFF</string>
+			</dict>
 		</dict>
+		<dict>
+			<key>scope</key>
+			<string>pitchdop.note</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#66CCFF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>durvolop.note</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#66DDEE</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>bracket.note</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#66CCEE</string>
+			</dict>
+		</dict>
+
+		<!--  Command  -->
+
+		<dict>
+			<key>scope</key>
+			<string>mark.command</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#A6E22EC0</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>keyword.command</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#A6E22E</string>
+			</dict>
+		</dict>
+
+		<!--  Comment  -->
+
+		<dict>
+			<key>scope</key>
+			<string>description.comment</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#66CCEEC0</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>mark.comment</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#606060</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>infomation.comment</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#A0A0A0</string>
+			</dict>
+		</dict>
+
+		<!--End of Thulium Music Style Sheet-->
+
 	</array>
 </dict>
 </plist>
+

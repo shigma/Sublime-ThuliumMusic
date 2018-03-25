@@ -22,6 +22,13 @@ file_extensions:
 
 scope: source.Thulium
 
+variables:
+  span: '\d+(~\d+)?'
+  exp: '(\d+([./]\d+)?|Log2\(\d+\)([+\-]\d+)?)'
+  _op: "[,'#b]*[ac-wyzA-Z]*[:>]*"
+  _pt: "[0-7%x]{{_op}}"
+  note: '(({{_pt}}|\[{{_pt}}*\]){{_op}}[=._\-]*`*)'
+
 contexts:
 
   main:
@@ -140,9 +147,9 @@ contexts:
           scope: bracket.track
         - match: '[a-zA-Z]\w*(?!:)'
           scope: instrument.track
-        # - match: (?=\()
-        #   scope: bracket.function
-        #   push: function.alias
+        - match: \(
+          scope: bracket.function
+          push: function.alias
     - include: track.general
 
   track.general:
@@ -150,7 +157,6 @@ contexts:
     # barline: 小节线
     # subtrack: 子音轨
     # repeat: 反复相关
-    - include: note
     - match: '([a-zA-Z]\w* *)(\()'
       captures:
         1: name.function
@@ -176,14 +182,35 @@ contexts:
         1: barline-plain.track
         2: barline.track
     - include: subtrack
-    - match: '[\\\|+s]'
+    - match: '[\|/+s]'
       scope: barline.track
+    - match: \\(?=({{span}}(,{{span}})*)?:)
+      scope: barline.track
+      push: 
+        - match: ':'
+          scope: barline.track
+          pop: true
+        - match: '[~,]'
+          scope: repeat.track
+        - match: \d+
+          scope: repeat-number.track
+    - match: \[(?=({{span}}\.)+\])
+      scope: barline.track
+      push: 
+        - match: \]
+          scope: barline.track
+          pop: true
+        - match: '[~\.]'
+          scope: repeat.track
+        - match: \d+
+          scope: repeat-number.track
     - match: DC|DS|Coda|ToCoda|DaCapo|DaSegno|Fine
       scope: operator.track
     - match: '(@)([a-zA-Z]\w*)'
       captures:
         1: bracket.track
         2: name.track
+    - include: note
 
   subtrack:
     - match: \{(\d+\*)?
@@ -209,6 +236,8 @@ contexts:
               scope: bracket.note
               pop: true
         - include: pitch
+        - match: "[#',b]"
+          scope: pitchdop.note
         - match: '[>:._=\-`]'
           scope: durvolop.note
         - match: '(?=.)'
@@ -226,7 +255,7 @@ contexts:
           pop: true
 
   number.integer:
-    - match: ([+\-]?)(\d+(?:\.\d+)?)
+    - match: ([+\-]?)(\d+(\.\d+)?)
       captures:
         1: operator.number
         2: unsigned.number
@@ -241,9 +270,9 @@ contexts:
         4: unsigned.number
     - match: (Log2\()(\d+)(\))(?=([+/-])(\d+))?
       captures:
-        1: function.number
+        1: keyword.number
         2: unsigned.number
-        3: function.number
+        3: keyword.number
         4: operator.number
         5: unsigned.number
 
@@ -287,8 +316,33 @@ contexts:
         3: unsigned.number
     # Spd
     - match: (\d+(?=.\d+)?)(?=\))
+      scope: unsigned.number
+    # KeyShift
+    - match: ([+\-])(\d+)(?=\))
       captures:
-        1: unsigned.number
+        1: identifier.function
+        2: unsigned.number
+    # Tuplet
+    - match: (?=\d+~\))
+      push: 
+        - match: ~
+          scope: identifier.function
+          pop: true
+        - include: number.integer
+    # Tremolo
+    - match: (?={{exp}}[=\-]\))
+      push: 
+        - match: '[=\-]'
+          scope: identifier.function
+          pop: true
+        - include: number.expression
+    # GraceNote
+    - match: (?={{note}}+\^\))
+      push: 
+        - match: \^
+          scope: identifier.function
+          pop: true
+        - include: note
 
   function.argument:
     - match: (?=[;\)])
@@ -304,5 +358,13 @@ contexts:
           scope: bracket.function
           pop: true
         - include: function.argument
-
-
+    - match: \"
+      scope: bracket.function
+      push: 
+        - match: \"
+          scope: bracket.function
+          pop: true
+        - match: \\.
+          scope: number.expression
+        - match: .
+          scope: number.expression

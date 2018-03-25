@@ -1,10 +1,18 @@
 %YAML 1.2
 ---
-#是否添加颜色
-#是否添加辅助编辑build-snipet
+#是否添加辅助编辑build-snippet
 ###是否添加peek definition,估计这个时候你的scope就要gg了
 ###到时候再看一遍那个scope文档，多用meta和Markup这种正常标记语言常用的scope
 ###2018-3-24：我觉得不一定gg，最多是没有办法发布到package control上。
+
+# 基本类型
+  # comment: 注释
+  # command: 命令
+  # library: 库
+  # number: 数字
+  # function: 函数
+  # track: 音轨
+  # note: 音符
 
 name: Thulium Music
 
@@ -14,136 +22,281 @@ file_extensions:
 
 scope: source.Thulium
 
+variables:
+  sr: '\d+'
+
 contexts:
 
   main:
-
+    # 注释
     - include: comment
+    # 命令
     - include: command
+    # 音轨
     - include: track
 
   comment:
+    # marker: 注释前的//号
+    # section: 乐章名称
+    # default: 默认注释信息
     - match: ^//
-      scope: mark.comment.Thulium
+      scope: marker.comment
       push:
-        - match: -{2,}
-          scope: mark.comment.Thulium
-        - match: '[^\-]+(?=-{2,})'
-          scope: infomation.comment
-        - match: '$\n'
+        - match: (-{2,})([^\-]+)(-{2,})
+          captures:
+            1: marker.comment
+            2: section.comment
+            3: marker.comment
+        - match: \S+
+          scope: default.comment
+        - match: $
           pop: true
 
   command:
+    # marker: 命令前的#号
+    # keyword: 命令的关键字
+    # argument: 命令的参数
     - match: ^#
-      scope: mark.command.Thulium
-      push: command.general
-
-  command.general:
-    - match: End
-      scope: keyword.command.Thulium
-    - match: Include
-      scope: keyword.command.Thulium
+      scope: marker.command
       push:
-        - match: <.*>
-          scope: keyword.command.Thulium
+        - match: '[Ee]nd|[Tt]rack'
+          scope: keyword.command
+          push:
+            - match: \S+
+              scope: invalid.command
+            - match: $
+              pop: true
+        - match: '[Ii]nclude'
+          scope: keyword.command
+          push:
+            - match: ([<\"])([^>]*)([\">])
+              captures:
+                1: marker.command
+                2: argument.command
+                3: marker.command
+            - match: \S+
+              scope: invalid.command
+            - match: $
+              pop: true
+        - match: '[Cc]hord'
+          scope: keyword.command
+          push:
+            - include: library.chord
+            - match: ^#
+              scope: marker.command
+              pop: true
+            - match: \S+
+              scope: invalid.command
+        - match: '[Ff]unction'
+          scope: keyword.command
+          push:
+            - include: library.function
+            - match: ^#
+              scope: marker.command
+              pop: true
+            - match: '\S+'
+              scope: invalid.command
+        - match: '\S+(?=[ \t])'
+          scope: invalid.command
+        - match: $
           pop: true
-    - match: Chord
-      scope: keyword.command.Thulium
-      push:
-        - match: ^[a-zA-Z]
-          scope: pitchdop.note.Thulium
-        - match: \t+([^\t]+\t+)?
-          scope: description.comment.Thulium
-        - include: library.chord
-          pop: true
-    - match: Function
-      scope: keyword.command.Thulium
-      push: library.function
-    - match: Track
-      scope: keyword.command.Thulium
-    - match: $\n
-      pop: true
 
-  library.function:
-    - include: Packages/JavaScript/JavaScript.sublime-syntax
-    - match: '^#'
-      scope: mark.command.Thulium
-      pop: true
+  library.function: 
+    - include: library.function.sublime-syntax
 
   library.chord:
-    - match: \[
-      scope: bracket.note.Thulium
-      push:
-        - include: number.integer
-        - match: ';'
-          scope: bracket.note.Thulium
-        - match: \]
-          scope: bracket.note.Thulium
-          pop: true
-    - include: number.integer
-    - match: ','
-      scope: bracket.note.Thulium 
-
-  number.integer:
-    - match: '[+\-]'
-      scope: bracket.note.Thulium
-    - match: \d+(\.\d+)?
-      scope: degree.note.Thulium
-
-  number.percentage:
-    - match: '%'
-      scope: bracket.note.Thulium
-    - match: \d+(\.\d+)?
-      scope: degree.note.Thulium
-
-  track:
-    - match: <\*?
-      scope: mark.command.Thulium
-      push:
-        - match: '[a-zA-Z]\w*(?=[*:])'
-          scope: mark.command.Thulium
-        - match: '[:,]'
-          scope: mark.command.Thulium
-        - match: '[a-zA-Z]\w*(?!:)'
-          scope: mark.command.Thulium
-        - match: \(
-          scope: mark.command.Thulium
-          push: 
-            - include: number.percentage
-            - match: \)
-              scope: mark.command.Thulium
+    - match: ^[a-zA-Z](?=[\n\t])
+      scope: pitchdop.note
+      push: 
+        - match: \t+([^\t]+\t+)?
+          scope: description.library
+        - match: \[(?=.*\])
+          scope: bracket.note
+          push:
+            - include: number.integer
+            - match: ';'
+              scope: bracket.note
+            - match: \]
+              scope: bracket.note
               pop: true
-        - match: \*?>
-          scope: mark.command.Thulium
+        - include: number.integer
+        - match: ','
+          scope: bracket.note 
+        - match: $
           pop: true
+    - match: ^[^#\n].*
+      scope: invalid.library
+  
+  track:
+    # bracket: 尖括号
+    # name: 音轨名
+    # instrument: 乐器声明
+    - match: <\*?
+      scope: bracket.track
+      push:
+        - match: \*?>
+          scope: bracket.track
+          pop: true
+        - match: '[a-zA-Z]\w*(?=[*:])'
+          scope: name.track
+        - match: '[:,]'
+          scope: bracket.track
+        - match: '[a-zA-Z]\w*(?!:)'
+          scope: instrument.track
+        - match: (?=\()
+          scope: bracket.function
+          push: function.alias
     - include: track.general
 
-  # strings:
-  #   - match: '\{'
-  #     scope: keyword.control.textMusic
-  #     push: 
-  #       - include: square_bracket
-  #       - include: strings
-  #       #这里的递归是为了处理{}的多重性。
+  track.general:
+    # operator: 操作符
+    # barline: 小节线
+    # subtrack: 子音轨
+    # repeat: 反复相关
+    - include: note
+    - match: '([a-zA-Z]\w* *)(\()'
+      captures:
+        1: name.function
+        2: bracket.function
+      push:
+        - match: \)
+          scope: bracket.function
+          pop: true
+        - include: function.argument
+    - match: '\('
+      scope: bracket.function
+      push: function.alias
+    - match: '[&*\^]'
+      scope: operator.track
+    - match: '(\|)(\|:)'
+      captures:
+        1: barline.track
+        2: barline-plain.track
+    - match: '(:?\|)(\|)'
+      captures:
+        1: barline-plain.track
+        2: barline.track
+    - match: '[\\\|+s]'
+      scope: barline.track
+    - match: DC|DS|Coda|ToCoda|DaCapo|DaSegno|Fine
+      scope: operator.track
+    - match: \{(\d+\*)?
+      scope: subtrack.track
+      push:
+        - match: \}
+          scope: subtrack.track
+          pop: true
+        - include: track.general
+    - match: '(@)([a-zA-Z]\w*)'
+      captures:
+        1: bracket.track
+        2: name.track
 
-  #       - match: '\}'
-  #         scope: keyword.control.textMusic
-  #         pop: true
-  #   - include: square_bracket
+  note:
+    # bracket: 和弦的方括号
+    # degree: 唱名，打击乐
+    # durvolop: 音量和时值操作符
+    # pitchdop: 音高和和弦操作符
+    - match: (?=[\[0-7%x])
+      push:
+        - match: \[
+          scope: bracket.note
+          push:
+            - include: pitch
+            - match: \]
+              scope: bracket.note
+              pop: true
+        - include: pitch
+        - match: '[>:._=\-`]'
+          scope: durvolop.note
+        - match: '(?=.)'
+          pop: true
+    - match: '(?=[^\[0-7%x])'
+      pop: true
 
-  # square_bracket:
-  #     #这里面要求了[不要有{}]否则要另行处理。若果你们要新增的语法就再修改。
-  #   - match: \[
-  #     scope: keyword.control.textMusic
-  #     push: 
-  #       - include: inter-string
-  #       - match: \]
-  #         scope: keyword.control.textMusic
-  #         pop: true
-  #   - include: inter-string
-  #   - match: \]|\)
-  #   #这我就只好另写了,因为不能包含}
-  #     scope: invalid.illegal.textMusic
+  pitch:
+    - match: '[0-7%x]'
+      scope: degree.note
+      push: 
+        - match: "[#',a-wyzA-Z]"
+          scope: pitchdop.note
+        - match: '[:>]'
+          scope: durvolop.note
+        - match: '(?=.)'
+          pop: true
+
+  number.integer:
+    - match: ([+\-]?)(\d+(?:\.\d+)?)
+      captures:
+        1: operator.number
+        2: unsigned.number
+
+  number.expression:
+    - include: number.integer
+    - match: ([+\-]?)(\d+)(/)(\d+)
+      captures:
+        1: operator.number
+        2: unsigned.number
+        3: operator.number
+        4: unsigned.number
+    - match: (Log2\()(\d+)(\))(?=([+/-])(\d+))?
+      captures:
+        1: function.number
+        2: unsigned.number
+        3: function.number
+        4: operator.number
+        5: unsigned.number
+
+  function.alias:
+    # name: 函数名
+    # identifier: 简记法标识符
+    # bracket: 函数括号
+    - match: \)
+      scope: bracket.function
+      pop: true
+    - match: '([a-zA-Z]\w*)(:)'
+      captures:
+        1: name.function
+        2: bracket.function
+      push: function.argument
+      with_prototype:
+        - match: ;
+          scope: bracket.function
+          pop: true
+
+    # 下面是标准包函数的简记法
+    - match: (1=)([#b]*[A-G][',]*)(?=\))
+      captures:
+        1: identifier.function
+        2: unsigned.number
+    - match: \^
+      scope: identifier.function
+      push: 
+        - include: note
+    - match: (\d+(?=\.\d+)?)(%)(?=\))
+      captures:
+        1: unsigned.number
+        2: identifier.function
+    - match: (\d+)(/)(\d+)(?=\))
+      captures:
+        1: unsigned.number
+        2: identifier.function
+        3: unsigned.number
+    - match: (\d+(?=.\d+)?)(?=\))
+      captures:
+        1: unsigned.number
+
+  function.argument:
+    - match: (?=\))
+      pop: true
+    - include: number.expression
+    - match: ','
+      scope: bracket.function
+    - match: \{
+      scope: emmmmm
+
+
+
 
   # inter-string:
   #     - match: \|
@@ -176,15 +329,6 @@ contexts:
   #       - match: '\>|$\n?'
   #         scope: keyword.control.textMusic
   #         pop: true
-
-  # inter-instrument:
-  #       - include: function
-  #       - match: ','
-  #         scope: keyword.control.textMusic
-  #         #暂定允许这一个符号
-  #       - match: \w
-  #         scope: string.other.textMusic
-
 
   # quote:
   #   - match: '@'

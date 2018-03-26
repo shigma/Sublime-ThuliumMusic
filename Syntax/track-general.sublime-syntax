@@ -1,0 +1,87 @@
+%YAML 1.2
+---
+
+scope: track.Thulium
+
+variables:
+  span: '\d+(~\d+)?'
+
+contexts:
+
+  prototype:
+    - match:  <\*
+      scope: marker.comment
+      push: 
+        - meta_scope: track.comment
+        - match: \*>
+          scope: marker.comment
+          pop: true
+
+  main:
+    - include: track.general
+
+  track.general:
+    # operator: 操作符
+    # barline: 小节线
+    # subtrack: 子音轨
+    # repeat: 反复相关
+    - match: '([a-zA-Z]\w* *)(\()'
+      captures:
+        1: name.function
+        2: bracket.function
+      push:
+        - match: \)
+          scope: bracket.function
+          pop: true
+        - include: function-argument.sublime-syntax
+    - match: '\('
+      scope: bracket.function
+      push: function-shorthand.sublime-syntax
+    - match: '[~\$]'
+      scope: identifier.function
+    - match: '[!&*\^]'
+      scope: operator.track
+    - match: '(\|)(\|:)'
+      captures:
+        1: barline.track
+        2: barline-plain.track
+    - match: '(:?\|)(\|)'
+      captures:
+        1: barline-plain.track
+        2: barline.track
+    - match: \{(\d+\*)?
+      scope: subtrack.track
+      push:
+        - match: \}
+          scope: subtrack.track
+          pop: true
+        - include: track.general
+    - match: '[\|/+s]'
+      scope: barline.track
+    - match: \\(?=({{span}}(,{{span}})*)?:)
+      scope: barline.track
+      push: 
+        - match: ':'
+          scope: barline.track
+          pop: true
+        - match: '[~,]'
+          scope: repeat.track
+        - match: \d+
+          scope: repeat-number.track
+    - match: \[(?=({{span}}\.)+\])
+      scope: barline.track
+      push: 
+        - match: \]
+          scope: barline.track
+          pop: true
+        - match: '[~\.]'
+          scope: repeat.track
+        - match: \d+
+          scope: repeat-number.track
+    - match: DC|DS|Coda|ToCoda|DaCapo|DaSegno|Fine
+      scope: operator.track
+    - match: '(@)([a-zA-Z]\w*)'
+      captures:
+        1: bracket.track
+        2: name.track
+    - include: Note.sublime-syntax

@@ -1,0 +1,31 @@
+%YAML 1.2
+---
+
+scope: number.Thulium
+
+hidden: true
+
+contexts:
+
+  main:
+    - include: number
+
+  number:
+    - match: ([+\-]?)(\d+)(/)(\d+)
+      captures:
+        1: operator.number
+        2: unsigned.number
+        3: operator.number
+        4: unsigned.number
+    - match: (Log2\()(\d+)(\))(?=([+/-])(\d+))?
+      captures:
+        1: keyword.number
+        2: unsigned.number
+        3: keyword.number
+        4: operator.number
+        5: unsigned.number
+    - match: ([+\-]?)(\d+(\.\d+)?)
+      captures:
+        1: operator.number
+        2: unsigned.number
+

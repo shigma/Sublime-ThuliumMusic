@@ -1,5 +1,5 @@
 {
-	"scope": "source.Thulium",
+	"scope": "library.Thulium",
 	"completions": [
         {
             "trigger": "Function",

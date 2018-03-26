@@ -213,7 +213,7 @@ contexts:
   comments:
     # Add abridged notation
     - match: (?=/\*{4,}.+\*{4,}/)
-      push: Shorthand.sublime-syntax
+      push: Library-shorthand.sublime-syntax
     - match: /\*\*(?!/)
       scope: punctuation.definition.comment.js
       push:

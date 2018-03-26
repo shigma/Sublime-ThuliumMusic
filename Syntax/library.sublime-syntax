@@ -1,0 +1,81 @@
+%YAML 1.2
+---
+
+scope: library.Thulium
+
+hidden: true
+
+contexts:
+
+  main:
+    # marker: 命令前的#号
+    # keyword: 命令的关键字
+    # argument: 命令的参数
+    - match: '[Ee]nd|[Tt]rack'
+      scope: keyword.command
+      push:
+        - match: \S+
+          scope: invalid.command
+        - match: $
+          pop: true
+    - match: '[Ii]nclude'
+      scope: keyword.command
+      push:
+        - match: ([<\"])([^>]*)([\">])
+          captures:
+            1: marker.command
+            2: argument.command
+            3: marker.command
+        - match: \S+
+          scope: invalid.command
+        - match: $
+          pop: true
+    - match: '[Cc]hord'
+      scope: keyword.command
+      push:
+        - include: library.chord
+        - match: ^#
+          scope: marker.command
+          pop: true
+        - match: \S+
+          scope: invalid.command
+    - match: '[Ff]unction'
+      scope: keyword.command
+      push:
+        - match: ^#
+          scope: marker.command
+          pop: true
+        - include: JavaScript.sublime-syntax
+    - match: '\S+(?=[ \t])'
+      scope: invalid.command
+    - match: $
+      pop: true
+
+  library.chord:
+    - match: ^[a-zA-Z](?=[\n\t])
+      scope: pitchdop.note
+      push: 
+        - match: \t+([^\t]+\t+)?
+          scope: description.library
+        - match: \[(?=.*\])
+          scope: bracket.note
+          push:
+            - include: number.integer
+            - match: ';'
+              scope: bracket.note
+            - match: \]
+              scope: bracket.note
+              pop: true
+        - include: number.integer
+        - match: ','
+          scope: bracket.note 
+        - match: $
+          pop: true
+    - match: ^[^#\n\t].*
+      scope: invalid.library
+  
+  number.integer:
+    - match: ([+\-]?)(\d+(\.\d+)?)
+      captures:
+        1: operator.number
+        2: unsigned.number

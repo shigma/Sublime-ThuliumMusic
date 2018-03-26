@@ -1,0 +1,41 @@
+%YAML 1.2
+---
+
+scope: function.Thulium
+
+contexts:
+
+  main:
+    - include: function.argument
+
+  function.argument:
+    - match: (?=[;\)])
+      pop: true
+    - match: ','
+      scope: bracket.function
+    - include: number.sublime-syntax
+    - match: \{(\d+\*)?
+      scope: subtrack.track
+      push:
+        - match: \}
+          scope: subtrack.track
+          pop: true
+        - include: track-general.sublime-syntax
+    - match: \[
+      scope: bracket.function
+      push: 
+        - match: \]
+          scope: bracket.function
+          pop: true
+        - include: function.argument
+    - match: \"
+      scope: bracket.function
+      push: 
+        - match: \"
+          scope: bracket.function
+          pop: true
+        - match: \\.
+          scope: number.expression
+        - match: .
+          scope: number.expression
+

@@ -1,0 +1,78 @@
+%YAML 1.2
+---
+
+scope: source.Thulium
+
+hidden: true
+
+variables:
+  expr: '(\d+([./]\d+)?|Log2\(\d+\)([+\-]\d+)?)'
+
+contexts:
+
+  main:
+    - include: package.standard
+  
+  package.standard:
+
+    # Key
+    - match: (1=)([#b]*[A-G][',]*)(?=\))
+      captures:
+        1: identifier.function
+        2: unsigned.number
+
+    # Appoggiatura
+    - match: \^(?=[^\)]*\))
+      scope: identifier.function
+      push: 
+        - match: (?=\))
+          pop: true
+        - include: Note.sublime-syntax
+
+    # GraceNote
+    - match: (?=[^\)]*\^\))
+      push: 
+        - match: \^
+          scope: identifier.function
+          pop: true
+        - include: Note.sublime-syntax
+
+    # Vol
+    - match: (\d+\.?\d*)(%)(?=\))
+      captures:
+        1: unsigned.number
+        2: identifier.function
+
+    # BarBeat
+    - match: (\d+)(/)(\d+)(?=\))
+      captures:
+        1: unsigned.number
+        2: identifier.function
+        3: unsigned.number
+
+    # Spd
+    - match: (\d+\.?\d*)(?=\))
+      scope: unsigned.number
+
+    # KeyShift
+    - match: ([+\-])(\d+)(?=\))
+      captures:
+        1: identifier.function
+        2: unsigned.number
+
+    # Tuplet
+    - match: (?=\d+~\))
+      push: 
+        - match: ~
+          scope: identifier.function
+          pop: true
+        - include: Number.sublime-syntax
+
+    # Tremolo
+    - match: (?={{expr}}[=\-]\))
+      push: 
+        - match: '[=\-]'
+          scope: identifier.function
+          pop: true
+        - include: Number.sublime-syntax
+

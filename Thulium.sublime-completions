@@ -1,0 +1,25 @@
+{
+	"scope": "source.Thulium",
+	"completions": [
+        {
+            "trigger": "Function",
+            "contents": "Function \n\n"
+        },
+        {
+            "trigger": "End",
+            "contents": "End \n\n"
+        },
+        {
+            "trigger": "Chord",
+            "contents": "Chord \n\n"
+        },
+        {
+            "trigger": "Track",
+            "contents": "Track \n\n"
+        },
+        {
+            "trigger": "Include",
+            "contents": "Include <${1:}>\n\n$0"
+        }
+	]
+}

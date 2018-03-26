@@ -135,10 +135,10 @@ contexts:
     # bracket: 尖括号
     # name: 音轨名
     # instrument: 乐器声明
-    - match: <\*?
+    - match: <:?
       scope: bracket.track
       push:
-        - match: \*?>
+        - match: :?>
           scope: bracket.track
           pop: true
         - match: '[a-zA-Z]\w*(?=[*:])'
@@ -152,11 +152,21 @@ contexts:
           push: function.alias
     - include: track.general
 
+  track.comment:
+    - match:  <\*
+      scope: marker.comment
+      push: 
+        - meta_scope: track.comment
+        - match: \*>
+          scope: marker.comment
+          pop: true
+
   track.general:
     # operator: 操作符
     # barline: 小节线
     # subtrack: 子音轨
     # repeat: 反复相关
+    - include: track.comment
     - match: '([a-zA-Z]\w* *)(\()'
       captures:
         1: name.function
@@ -294,6 +304,7 @@ contexts:
     - include: packages
 
   function.argument:
+    - include: track.comment
     - match: (?=[;\)])
       pop: true
     - include: number.expression

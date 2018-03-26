@@ -1,6 +1,0 @@
-<snippet>
-	<content><![CDATA[Tremolo2(${1:$TM_SELECTED_TEXT}, {${2:$TM_SELECTED_TEXT}}, {${3:$TM_SELECTED_TEXT}})${4:$TM_SELECTED_TEXT}]]></content>
-	<tabTrigger>Tremolo2</tabTrigger>
-	<scope>source.Thulium</scope>
-	<description>Tremolo2(……)</description>
-</snippet>

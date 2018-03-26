@@ -931,6 +931,17 @@
 		</dict>
 		<dict>
 			<key>scope</key>
+			<string>track.comment</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>italic</string>
+				<key>foreground</key>
+				<string>#908080</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
 			<string>default.comment</string>
 			<key>settings</key>
 			<dict>

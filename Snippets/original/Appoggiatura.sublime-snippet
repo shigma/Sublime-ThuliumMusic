@@ -1,6 +1,0 @@
-<snippet>
-	<content><![CDATA[Appoggiatura({${1:$TM_SELECTED_TEXT}}, {${2:$TM_SELECTED_TEXT}})${3:$TM_SELECTED_TEXT}]]></content>
-	<tabTrigger>Appoggiatura</tabTrigger>
-	<scope>source.Thulium</scope>
-	<description>Appoggiatura({…}, {…})</description>
-</snippet>

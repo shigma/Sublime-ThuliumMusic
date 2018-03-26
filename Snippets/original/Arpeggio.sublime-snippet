@@ -1,6 +1,0 @@
-<snippet>
-	<content><![CDATA[Arpeggio({${1:$TM_SELECTED_TEXT}})${2:$TM_SELECTED_TEXT}]]></content>
-	<tabTrigger>Arpeggio</tabTrigger>
-	<scope>source.Thulium</scope>
-	<description>Arpeggio({…})</description>
-</snippet>

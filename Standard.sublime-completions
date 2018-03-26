@@ -1,0 +1,101 @@
+{
+	"scope": "source.Thulium",
+	"completions": [
+        {
+            "trigger": "Fermata",
+            "contents": "Fermata({${1:<*track*>}})$0"
+        },
+        {
+            "trigger": "Arpeggio",
+            "contents": "Arpeggio({${1:<*track*>}})$0"
+        },
+        {
+            "trigger": "Appoggiatura",
+            "contents": "Appoggiatura({${1:<*track*>}}, {${2:<*track*>}})$0"
+        },
+        {
+            "trigger": "GraceNote",
+            "contents": "GraceNote({${1:<*track*>}}, {${2:<*track*>}})$0"
+        },
+        {
+            "trigger": "Portamento",
+            "contents": "Portamento({${1:<*track*>}}, {${2:<*track*>}})$0"
+        },
+        {
+            "trigger": "Tuplet",
+            "contents": "Tuplet(${1:<*int*>}, {${2:<*track*>}})$0"
+        },
+        {
+            "trigger": "Tremolo1",
+            "contents": "Tremolo1(${1:<*expr*>}, {${2:<*track*>}})$0"
+        },
+        {
+            "trigger": "Tremolo2",
+            "contents": "Tremolo2(${1:<*expr*>}, {${2:<*track*>}}, {${3:<*track*>}})$0"
+        },
+        {
+            "trigger": "BarBeat",
+            "contents": "BarBeat(${1:<*bar*>}, ${2:<*beat*>})$0"
+        },
+        {
+            "trigger": "Stac",
+            "contents": "Stac(${1:<*scale*>})$0"
+        },
+        {
+            "trigger": "Con",
+            "contents": "Con(${1:<*octave*>})$0"
+        },
+        {
+            "trigger": "Vol",
+            "contents": "Vol(${1:<*volume*>})$0"
+        },
+        {
+            "trigger": "Spd",
+            "contents": "Spd(${1:<*speed*>})$0"
+        },
+        {
+            "trigger": "Key",
+            "contents": "Key(${1:<*key*>})$0"
+        },
+        {
+            "trigger": "Oct",
+            "contents": "Oct(${1:<*octave*>})$0"
+        },
+        {
+            "trigger": "KeyShift",
+            "contents": "KeyShift(${1:<*delta*>})$0"
+        },
+        {
+            "trigger": "Dur",
+            "contents": "Dur(${1:<*scale*>})$0"
+        },
+        {
+            "trigger": "Acct",
+            "contents": "Acct(${1:<*scale*>})$0"
+        },
+        {
+            "trigger": "Seg",
+            "contents": "Seg(${1:<*scale*>})$0"
+        },
+        {
+            "trigger": "Port",
+            "contents": "Port(${1:<*scale*>})$0"
+        },
+        {
+            "trigger": "Ferm",
+            "contents": "Ferm(${1:<*scale*>})$0"
+        },
+        {
+            "trigger": "Trace",
+            "contents": "Trace(${1:<*count*>})$0"
+        },
+        {
+            "trigger": "FadeIn",
+            "contents": "FadeIn(${1:<*time*>})$0"
+        },
+        {
+            "trigger": "FadeOut",
+            "contents": "FadeOut(${1:<*time*>})$0"
+        }
+	]
+}

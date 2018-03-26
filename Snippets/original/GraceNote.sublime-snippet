@@ -1,6 +1,0 @@
-<snippet>
-	<content><![CDATA[GraceNote({${1:$TM_SELECTED_TEXT}}, {${2:$TM_SELECTED_TEXT}})${3:$TM_SELECTED_TEXT}]]></content>
-	<tabTrigger>GraceNote</tabTrigger>
-	<scope>source.Thulium</scope>
-	<description>GraceNote({…}, {…})</description>
-</snippet>

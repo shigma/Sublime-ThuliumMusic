@@ -639,7 +639,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#BBFF22</string>
+				<string>#99FF22</string>
 			</dict>
 		</dict>
 		<dict>
@@ -648,7 +648,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFFF88</string>
+				<string>#FFDD44</string>
 			</dict>
 		</dict>
 		<dict>
@@ -657,7 +657,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFEE44</string>
+				<string>#CCFF66</string>
 			</dict>
 		</dict>
 
@@ -689,7 +689,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#DD88FF</string>
+				<string>#DDBBFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -700,7 +700,7 @@
 				<key>fontStyle</key>
 				<string>bold</string>
 				<key>foreground</key>
-				<string>#DD88FF</string>
+				<string>#DDBBFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -761,7 +761,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#EE3355</string>
+				<string>#EE3366</string>
 			</dict>
 		</dict>
 		<dict>
@@ -770,7 +770,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF3377</string>
+				<string>#FF4488</string>
 			</dict>
 		</dict>
 		<dict>
@@ -781,7 +781,7 @@
 				<key>fontStyle</key>
 				<string>italic</string>
 				<key>foreground</key>
-				<string>#FF7733</string>
+				<string>#FF8844</string>
 			</dict>
 		</dict>
 		<dict>
@@ -804,7 +804,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF9944</string>
+				<string>#FFEE33</string>
 			</dict>
 		</dict>
 		<dict>
@@ -813,7 +813,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#DD9922</string>
+				<string>#DDCC22</string>
 			</dict>
 		</dict>
 		<dict>
@@ -822,7 +822,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#DD9944</string>
+				<string>#EECC22</string>
 			</dict>
 		</dict>
 
@@ -848,9 +848,12 @@
 				<string>#66CCEE</string>
 			</dict>
 		</dict>
+
+	<!--  Shorthand  -->
+
 		<dict>
 			<key>scope</key>
-			<string>marker.alias.library</string>
+			<string>marker.shorthand</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -859,11 +862,48 @@
 		</dict>
 		<dict>
 			<key>scope</key>
-			<string>content.alias.library</string>
+			<string>content.shorthand</string>
 			<key>settings</key>
 			<dict>
+				<key>fontStyle</key>
+				<string>italic</string>
 				<key>foreground</key>
-				<string>#FFBBDD</string>
+				<string>#FFCCD7</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>escape.shorthand</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>italic</string>
+				<key>foreground</key>
+				<string>#FFAAC7</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>invalid.shorthand</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>italic</string>
+				<key>foreground</key>
+				<string>#FFEEF7</string>
+				<key>background</key>
+				<string>#553377</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>identifier.shorthand</string>
+			<key>settings</key>
+			<dict>
+				<key>fontStyle</key>
+				<string>italic</string>
+				<key>foreground</key>
+				<string>#FFBB44</string>
 			</dict>
 		</dict>
 

@@ -25,9 +25,14 @@ scope: source.Thulium
 variables:
   span: '\d+(~\d+)?'
   exp: '(\d+([./]\d+)?|Log2\(\d+\)([+\-]\d+)?)'
-  _op: "[,'#b]*[ac-wyzA-Z]*[:>]*"
-  _pt: "[0-7%x]{{_op}}"
-  note: '(({{_pt}}|\[{{_pt}}*\]){{_op}}[=._\-]*`*)'
+  # 下面的暂未使用，怀疑有问题
+  _pi: "[,'#b]*"
+  _ch: '[ac-wyzA-Z]*'
+  _vo: '[:>]*'
+  _du: '[=._\-]*`*'
+  pitch: "[0-7%x]{{_pi}}{{_ch}}{{_vo}}"
+  note: '(({{pitch}}|\[{{pitch}}*\])
+          {{_pi}}{{_vo}}{{_du}})'
 
 contexts:
 
@@ -94,19 +99,14 @@ contexts:
         - match: '[Ff]unction'
           scope: keyword.command
           push:
-            - include: library.function
             - match: ^#
               scope: marker.command
               pop: true
-            - match: '\S+'
-              scope: invalid.command
+            - include: JavaScript.sublime-syntax
         - match: '\S+(?=[ \t])'
           scope: invalid.command
         - match: $
           pop: true
-
-  library.function: 
-    - include: library.function.sublime-syntax
 
   library.chord:
     - match: ^[a-zA-Z](?=[\n\t])
@@ -128,7 +128,7 @@ contexts:
           scope: bracket.note 
         - match: $
           pop: true
-    - match: ^[^#\n].*
+    - match: ^[^#\n\t].*
       scope: invalid.library
   
   track:
@@ -171,7 +171,7 @@ contexts:
       push: function.alias
     - match: '[~\$]'
       scope: identifier.function
-    - match: '[&*\^]'
+    - match: '[!&*\^]'
       scope: operator.track
     - match: '(\|)(\|:)'
       captures:
@@ -261,7 +261,6 @@ contexts:
         2: unsigned.number
 
   number.expression:
-    - include: number.integer
     - match: ([+\-]?)(\d+)(/)(\d+)
       captures:
         1: operator.number
@@ -275,6 +274,7 @@ contexts:
         3: keyword.number
         4: operator.number
         5: unsigned.number
+    - include: number.integer
 
   function.alias:
     # name: 函数名
@@ -291,58 +291,7 @@ contexts:
         2: bracket.function
       push: function.argument
 
-    # Key
-    - match: (1=)([#b]*[A-G][',]*)(?=\))
-      captures:
-        1: identifier.function
-        2: unsigned.number
-    # Appoggiatura
-    - match: \^
-      scope: identifier.function
-      push: 
-        - include: note
-        - match: (?=\))
-          pop: true
-    # Vol
-    - match: (\d+(?=\.\d+)?)(%)(?=\))
-      captures:
-        1: unsigned.number
-        2: identifier.function
-    # BarBeat
-    - match: (\d+)(/)(\d+)(?=\))
-      captures:
-        1: unsigned.number
-        2: identifier.function
-        3: unsigned.number
-    # Spd
-    - match: (\d+(?=.\d+)?)(?=\))
-      scope: unsigned.number
-    # KeyShift
-    - match: ([+\-])(\d+)(?=\))
-      captures:
-        1: identifier.function
-        2: unsigned.number
-    # Tuplet
-    - match: (?=\d+~\))
-      push: 
-        - match: ~
-          scope: identifier.function
-          pop: true
-        - include: number.integer
-    # Tremolo
-    - match: (?={{exp}}[=\-]\))
-      push: 
-        - match: '[=\-]'
-          scope: identifier.function
-          pop: true
-        - include: number.expression
-    # GraceNote
-    - match: (?={{note}}+\^\))
-      push: 
-        - match: \^
-          scope: identifier.function
-          pop: true
-        - include: note
+    - include: packages
 
   function.argument:
     - match: (?=[;\)])
@@ -368,3 +317,70 @@ contexts:
           scope: number.expression
         - match: .
           scope: number.expression
+
+  packages:
+    - include: package.standard
+
+  package.standard:
+
+    # Key
+    - match: (1=)([#b]*[A-G][',]*)(?=\))
+      captures:
+        1: identifier.function
+        2: unsigned.number
+
+    # Appoggiatura
+    - match: \^(?=[^\)]*\))
+      scope: identifier.function
+      push: 
+        - match: (?=\))
+          pop: true
+        - include: note
+
+    # GraceNote
+    - match: (?=[^\)]*\^\))
+      push: 
+        - match: \^
+          scope: identifier.function
+          pop: true
+        - include: note
+
+    # Vol
+    - match: (\d+\.?\d*)(%)(?=\))
+      captures:
+        1: unsigned.number
+        2: identifier.function
+
+    # BarBeat
+    - match: (\d+)(/)(\d+)(?=\))
+      captures:
+        1: unsigned.number
+        2: identifier.function
+        3: unsigned.number
+
+    # Spd
+    - match: (\d+\.?\d*)(?=\))
+      scope: unsigned.number
+
+    # KeyShift
+    - match: ([+\-])(\d+)(?=\))
+      captures:
+        1: identifier.function
+        2: unsigned.number
+
+    # Tuplet
+    - match: (?=\d+~\))
+      push: 
+        - match: ~
+          scope: identifier.function
+          pop: true
+        - include: number.integer
+
+    # Tremolo
+    - match: (?={{exp}}[=\-]\))
+      push: 
+        - match: '[=\-]'
+          scope: identifier.function
+          pop: true
+        - include: number.expression
+

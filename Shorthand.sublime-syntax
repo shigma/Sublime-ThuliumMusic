@@ -1,0 +1,57 @@
+%YAML 1.2
+---
+
+scope: library.Thulium
+
+hidden: true
+
+contexts:
+
+  prototype:
+    - match: (?=\*+/)
+      pop: true
+    - match: \\[\\^#!$%&]
+      scope: escape.shorthand.Thulium
+    - match: '\\(?![\\^#!$%&])'
+      scope: invalid.shorthand.Thulium
+
+  main:
+    - meta_include_prototype: false
+    - meta_scope: content.shorthand.Thulium
+    - match: /\*+
+      scope: marker.shorthand.Thulium
+      push: notation.outer
+      with_prototype:
+        - match: \*+/
+          scope: marker.shorthand.Thulium
+          pop: true
+    - match: (?=.)
+      pop: true
+
+  notation.outer:
+    - meta_scope: content.shorthand.Thulium
+    - match: (&[1-9])
+      scope: identifier.shorthand.Thulium
+    - match: (&)(?![1-9])
+      scope: invalid.shorthand.Thulium
+    - match: ([#^!$%])
+      scope: invalid.shorthand.Thulium
+    - match: \(
+      scope: content.shorthand.Thulium
+      push: 
+        - match: \)
+          scope: content.shorthand.Thulium
+          pop: true
+        - include: notation.inner
+    - match: \)
+      scope: invalid.shorthand.Thulium
+
+  notation.inner:
+    - meta_scope: content.shorthand.Thulium
+    - match: ([#^]*[!$%&][1-9])
+      scope: identifier.shorthand.Thulium
+    - match: ([#^]*[!$%&])(?![1-9])
+      scope: invalid.shorthand.Thulium
+    - match: ([#^]+)(?![!$%&])
+      scope: invalid.shorthand.Thulium
+

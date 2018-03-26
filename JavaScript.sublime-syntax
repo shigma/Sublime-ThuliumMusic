@@ -1,7 +1,10 @@
 %YAML 1.2
 ---
 # Derived from JavaScript Next: https://github.com/Benvie/JavaScriptNext.tmLanguage
+
 scope: source.js
+
+hidden: true
 
 variables:
   identifier: '[_$[:alpha:]][_$[:alnum:]]*'
@@ -13,20 +16,8 @@ variables:
 
 contexts:
   main:
-    - match: '{{identifier}}'
-      scope: meta.function.declaration.js entity.name.function.js
-    - include: function-declaration-parameters
-    - match: (?=\s*\{)
-      push: function-block
-      with_prototype: 
-        - match: /\*+ +(?=.+ +\*{4,}/)
-          scope: marker.alias.library.Thulium
-          push: 
-            - match: \*{4,}/
-              scope: marker.alias.library.Thulium
-              pop: true
-            - match: \S
-              scope: content.alias.library.Thulium
+    - include: comments
+    - include: statements
 
   prototype:
     - include: comments
@@ -220,6 +211,9 @@ contexts:
       pop: true
 
   comments:
+    # Add abridged notation
+    - match: (?=/\*{4,}.+\*{4,}/)
+      push: Shorthand.sublime-syntax
     - match: /\*\*(?!/)
       scope: punctuation.definition.comment.js
       push:

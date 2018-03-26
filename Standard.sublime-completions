@@ -1,5 +1,5 @@
 {
-	"scope": "source.Thulium",
+	"scope": "track.Thulium",
 	"completions": [
         {
             "trigger": "Fermata",

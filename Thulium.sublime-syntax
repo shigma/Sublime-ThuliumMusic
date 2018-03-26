@@ -49,7 +49,7 @@ contexts:
     # Syntax/Library.sublime-syntax
     - match: ^#
       scope: marker.command
-      push: Library.sublime-syntax
+      push: library-general.sublime-syntax
 
   track:
     # bracket: 尖括号
@@ -70,5 +70,8 @@ contexts:
         - match: \(
           scope: bracket.function
           push: function-shorthand.sublime-syntax
-    - include: track-general.sublime-syntax
-
+    - match: (?=.)
+      push: track-general.sublime-syntax
+      with_prototype:
+        - match: $\s*^
+          pop: true

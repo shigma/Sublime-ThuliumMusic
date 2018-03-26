@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[(1=B)]]></content>
 	<tabTrigger>kb</tabTrigger>
-	<scope>source.Thulium</scope>
+	<scope>track.Thulium</scope>
 	<description>(1=B)</description>
 </snippet>

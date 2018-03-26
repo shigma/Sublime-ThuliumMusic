@@ -8,6 +8,9 @@ hidden: true
 contexts:
 
   main:
+    - include: library.general
+
+  library.general:
     # marker: 命令前的#号
     # keyword: 命令的关键字
     # argument: 命令的参数
@@ -41,11 +44,11 @@ contexts:
           scope: invalid.command
     - match: '[Ff]unction'
       scope: keyword.command
-      push:
+      push: JavaScript.sublime-syntax
+      with_prototype:
         - match: ^#
           scope: marker.command
           pop: true
-        - include: JavaScript.sublime-syntax
     - match: '\S+(?=[ \t])'
       scope: invalid.command
     - match: $

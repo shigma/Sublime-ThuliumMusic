@@ -57,21 +57,26 @@ contexts:
     # instrument: 乐器声明
     - match: <:?
       scope: bracket.track
-      push:
+      push: track.meta
+      with_prototype:
         - match: :?>
           scope: bracket.track
           pop: true
-        - match: '[a-zA-Z]\w*(?=[*:])'
-          scope: name.track
-        - match: '[:,]'
-          scope: bracket.track
-        - match: '[a-zA-Z]\w*(?!:)'
-          scope: instrument.track
-        - match: \(
-          scope: bracket.function
-          push: function-shorthand.sublime-syntax
+
     - match: (?=.)
       push: track-general.sublime-syntax
       with_prototype:
         - match: $\s*^
           pop: true
+
+  track.meta:
+    - meta_scope: instrument.Thulium
+    - match: '[a-zA-Z]\w*(?=:)'
+      scope: name.track
+    - match: '[:,]'
+      scope: bracket.track
+    - match: '[a-zA-Z]\w*(?!:)'
+      scope: instrument.track
+    - match: \(
+      scope: bracket.function
+      push: function-shorthand.sublime-syntax

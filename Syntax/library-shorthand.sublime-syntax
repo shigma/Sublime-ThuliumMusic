@@ -17,14 +17,11 @@ contexts:
 
   main:
     - meta_include_prototype: false
-    - meta_scope: content.shorthand.Thulium
-    - match: /\*+
+    - match: '/\*+ *'
       scope: marker.shorthand.Thulium
       push: notation.outer
-      with_prototype:
-        - match: \*+/
-          scope: marker.shorthand.Thulium
-          pop: true
+    - match: ' *\*+/'
+      scope: marker.shorthand.Thulium
     - match: (?=.)
       pop: true
 
@@ -47,7 +44,6 @@ contexts:
       scope: invalid.shorthand.Thulium
 
   notation.inner:
-    - meta_scope: content.shorthand.Thulium
     - match: ([#^]*[!$%&][1-9])
       scope: identifier.shorthand.Thulium
     - match: ([#^]*[!$%&])(?![1-9])

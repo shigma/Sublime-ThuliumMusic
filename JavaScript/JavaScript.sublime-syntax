@@ -211,9 +211,11 @@ contexts:
       pop: true
 
   comments:
-    # Add abridged notation
+    # Add shorthand notation
     - match: (?=/\*{4,}.+\*{4,}/)
-      push: Library-shorthand.sublime-syntax
+      push: 
+        - meta_include_prototype: false
+        - include: Library-shorthand.sublime-syntax
     - match: /\*\*(?!/)
       scope: punctuation.definition.comment.js
       push:

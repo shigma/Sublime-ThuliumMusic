@@ -1,5 +1,5 @@
 {
-	"scope": "instrument.Thulium",
+	"scope": "meta.track.Thulium",
 	"completions": [
 		{
 			"trigger": "BassDrum",

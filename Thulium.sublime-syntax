@@ -33,22 +33,22 @@ contexts:
     # section: 乐章名称
     # default: 默认注释信息
     - match: ^//
-      scope: marker.comment
+      scope: marker.comment.Thulium
       push:
         - match: (-{2,})([^\-]+)(-{2,})
           captures:
-            1: marker.comment
-            2: section.comment
-            3: marker.comment
+            1: marker.comment.Thulium
+            2: section.comment.Thulium
+            3: marker.comment.Thulium
         - match: \S+
-          scope: default.comment
+          scope: default.comment.Thulium
         - match: $
           pop: true
 
   command:
     # Syntax/Library.sublime-syntax
     - match: ^#
-      scope: marker.command
+      scope: marker.command.Thulium
       push: library-general.sublime-syntax
 
   track:
@@ -56,11 +56,11 @@ contexts:
     # name: 音轨名
     # instrument: 乐器声明
     - match: <:?
-      scope: bracket.track
+      scope: bracket.track.Thulium
       push: track.meta
       with_prototype:
         - match: :?>
-          scope: bracket.track
+          scope: bracket.track.Thulium
           pop: true
 
     - match: (?=.)
@@ -70,13 +70,13 @@ contexts:
           pop: true
 
   track.meta:
-    - meta_scope: instrument.Thulium
+    - meta_scope: meta.track.Thulium
     - match: '[a-zA-Z]\w*(?=:)'
-      scope: name.track
+      scope: name.track.Thulium
     - match: '[:,]'
       scope: bracket.track
     - match: '[a-zA-Z]\w*(?!:)'
-      scope: instrument.track
+      scope: instrument.track.Thulium
     - match: \(
-      scope: bracket.function
+      scope: bracket.function.Thulium
       push: function-shorthand.sublime-syntax

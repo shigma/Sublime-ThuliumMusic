@@ -60,11 +60,13 @@ contexts:
     # instrument: 乐器声明
     - match: <:?
       scope: bracket.track.Thulium
-      push: 
-        - match: :?>
+      push: track.meta
+      with_prototype:
+        - match: (?=:?>)
           scope: bracket.track.Thulium
           pop: true
-        - include: track.meta
+    - match: :?>
+      scope: bracket.track.Thulium
     - match: (?=.)
       push: track-general.sublime-syntax
       with_prototype:

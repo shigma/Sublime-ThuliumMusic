@@ -78,7 +78,7 @@ contexts:
         - match: ~
           scope: identifier.function.Thulium
           pop: true
-        - include: Number.sublime-syntax.Thulium
+        - include: number.sublime-syntax
 
     # Tremolo
     - match: (?={{expr}}[=\-]\))

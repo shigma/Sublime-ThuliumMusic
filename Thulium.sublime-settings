@@ -1,3 +1,15 @@
 {
-	"tab_completion": false
+	"tab_completion": false,
+	"tab_size": 4,
+	"translate_tabs_to_spaces": true,
+	"word_wrap": false,
+	"highlight_line": true,
+	"match_selection": false,
+	"show_errors_inline": true,
+	"auto_find_in_selection": true,
+	"copy_with_empty_selection": false,
+	// "auto_complete_selector": "",
+	"tab_completion": false,
+	"show_definitions": true,
+	"default_encoding": "UTF-8",
 }

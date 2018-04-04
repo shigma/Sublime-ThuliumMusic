@@ -16,26 +16,38 @@ contexts:
   package.standard:
 
     # Key
-    - match: (1=)([#b]*[A-G][',]*)(?=\))
-      captures:
-        1: identifier.function
-        2: unsigned.number
+    - match: (1=)(?=[^\^]*\))
+      scope: identifier.function
+      push: 
+        - match: ([#b]*)([A-G])([',]*)(?=\))
+          captures:
+            1: operator.number
+            2: unsigned.number
+            3: operator.number
+        - match: (?=\))
+          pop: true
+        - match: .
+          scope: unidentified.function
 
     # Appoggiatura
-    - match: \^(?=[^\)]*\))
+    - match: \^(?=.*\))
       scope: identifier.function
       push: 
         - match: (?=\))
           pop: true
         - include: Note.sublime-syntax
+        - match: .
+          scope: unidentified.function
 
     # GraceNote
     - match: (?=[^\)]*\^\))
       push: 
-        - match: \^
+        - match: \^(?=\))
           scope: identifier.function
           pop: true
         - include: Note.sublime-syntax
+        - match: .
+          scope: unidentified.function
 
     # Vol
     - match: (\d+\.?\d*)(%)(?=\))

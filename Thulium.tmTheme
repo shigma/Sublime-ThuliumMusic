@@ -600,7 +600,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#77DDFF</string>
+				<string>#77CCFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -609,7 +609,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#99BBFF</string>
+				<string>#99AAFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -618,7 +618,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#77EEEE</string>
+				<string>#77DDEE</string>
 			</dict>
 		</dict>
 		<dict>
@@ -627,7 +627,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#99CCEE</string>
+				<string>#99BBEE</string>
 			</dict>
 		</dict>
 
@@ -648,7 +648,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFBB33</string>
+				<string>#FFAA66</string>
 			</dict>
 		</dict>
 		<dict>
@@ -657,7 +657,18 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFBB66</string>
+				<string>#FFAA66</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>unidentified.function</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#882266</string>
+				<key>foreground</key>
+				<string>#FFFFFF</string>
 			</dict>
 		</dict>
 
@@ -689,7 +700,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF8899</string>
+				<string>#DDAAFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -721,6 +732,9 @@
 				<string>#FF66BB</string>
 			</dict>
 		</dict>
+
+	<!--  Meta  -->
+
 		<dict>
 			<key>scope</key>
 			<string>bracket.track</string>
@@ -729,7 +743,16 @@
 				<key>fontStyle</key>
 				<string>bold</string>
 				<key>foreground</key>
-				<string>#DD88DD</string>
+				<string>#AAFFBB</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>punctuation.track</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#AAFFBB</string>
 			</dict>
 		</dict>
 		<dict>
@@ -740,7 +763,7 @@
 				<key>fontStyle</key>
 				<string>italic</string>
 				<key>foreground</key>
-				<string>#FFAADD</string>
+				<string>#88FFAA</string>
 			</dict>
 		</dict>
 		<dict>
@@ -749,7 +772,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFBBDD</string>
+				<string>#AAFFCC</string>
 			</dict>
 		</dict>
 
@@ -804,7 +827,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFDD33</string>
+				<string>#FFCC33</string>
 			</dict>
 		</dict>
 		<dict>

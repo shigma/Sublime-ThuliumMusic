@@ -54,7 +54,7 @@ contexts:
         1: subtrack.track
         2: repeat-number.track
         3: repeat.track
-      push:
+      push: 
         - match: \}
           scope: subtrack.track
           pop: true
@@ -85,6 +85,6 @@ contexts:
       scope: operator.track
     - match: '(@)([a-zA-Z]\w*)'
       captures:
-        1: bracket.track
+        1: punctuation.track
         2: name.track
     - include: Note.sublime-syntax

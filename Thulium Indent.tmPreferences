@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Thulium Indent</string>
+	<key>scope</key>
+	<string>source.Thulium</string>
+	<key>settings</key>
+	<dict>
+		<key>decreaseIndentPattern</key>
+		<string>(?x)
+			^
+			(
+				[^"{\n]
+			)*
+			\}.*$
+		</string>
+		<key>increaseIndentPattern</key>
+		<string>(?x)
+			^.*\{
+			(
+				[^"}]
+			)*
+			($|/[/*])
+		</string>
+	</dict>
+</dict>
+</plist>

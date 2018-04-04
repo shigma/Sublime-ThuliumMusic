@@ -35,13 +35,16 @@ contexts:
     - match: ^//
       scope: marker.comment.Thulium
       push:
-        - match: (-{2,})([^\-]+)(-{2,})
-          captures:
-            1: marker.comment.Thulium
-            2: section.comment.Thulium
-            3: marker.comment.Thulium
+        - match: (-{2,})(?=.+-{2,})
+          scope: marker.comment.Thulium
+          push: 
+            - match: -{2,}
+              scope: marker.comment.Thulium
+            - match: .+(?!-|$)
+              scope: section.comment.Thulium
         - match: \S+
           scope: default.comment.Thulium
+      with_prototype: 
         - match: $
           pop: true
 
@@ -57,12 +60,11 @@ contexts:
     # instrument: 乐器声明
     - match: <:?
       scope: bracket.track.Thulium
-      push: track.meta
-      with_prototype:
+      push: 
         - match: :?>
           scope: bracket.track.Thulium
           pop: true
-
+        - include: track.meta
     - match: (?=.)
       push: track-general.sublime-syntax
       with_prototype:
@@ -80,3 +82,12 @@ contexts:
     - match: \(
       scope: bracket.function.Thulium
       push: function-shorthand.sublime-syntax
+    - match: \{
+      scope: subtrack.track
+      push: 
+        - match: \}
+          scope: subtrack.track
+          pop: true
+        - include: track-general.sublime-syntax
+
+

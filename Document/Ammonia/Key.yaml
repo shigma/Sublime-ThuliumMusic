@@ -1,0 +1,14 @@
+%YAML 1.2
+---
+
+Name: Key
+
+Syntax:
+  - Notation: Key(*key*)
+    Description: Reset the basic tonality to *key*
+  - Notation: Key(*"tone"*)
+    Description: Reset the basic tonality to *"tone"*
+  - Notation: (1=*"tone"*)
+    Description: The shorthand notation
+
+

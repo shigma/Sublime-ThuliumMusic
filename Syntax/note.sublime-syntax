@@ -18,28 +18,28 @@ contexts:
     - match: (?=[\[0-7%x])
       push:
         - match: \[
-          scope: bracket.note
+          scope: bracket.note.Thulium
           push:
             - include: pitch
             - match: \]
-              scope: bracket.note
+              scope: bracket.note.Thulium
               pop: true
         - include: pitch
         - match: "[#',b]"
-          scope: pitchdop.note
+          scope: pitchdop.note.Thulium
         - match: '[>:._=\-`]'
-          scope: durvolop.note
+          scope: durvolop.note.Thulium
         - match: '(?=.)'
           pop: true
 
   pitch:
     - match: '[0-7%x]'
-      scope: degree.note
+      scope: degree.note.Thulium
       push: 
         - match: "[#',a-wyzA-Z]"
-          scope: pitchdop.note
+          scope: pitchdop.note.Thulium
         - match: '[:>]'
-          scope: durvolop.note
+          scope: durvolop.note.Thulium
         - match: '(?=.)'
           pop: true
 

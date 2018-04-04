@@ -13,19 +13,19 @@ contexts:
   number:
     - match: ([+\-]?)(\d+)(/)(\d+)
       captures:
-        1: operator.number
-        2: unsigned.number
-        3: operator.number
-        4: unsigned.number
+        1: operator.number.Thulium
+        2: unsigned.number.Thulium
+        3: operator.number.Thulium
+        4: unsigned.number.Thulium
     - match: (Log2\()(\d+)(\))(?=([+\-])(\d+))?
       captures:
-        1: keyword.number
-        2: unsigned.number
-        3: keyword.number
-        4: operator.number
-        5: unsigned.number
+        1: keyword.number.Thulium
+        2: unsigned.number.Thulium
+        3: keyword.number.Thulium
+        4: operator.number.Thulium
+        5: unsigned.number.Thulium
     - match: ([+\-]?)(\d+(\.\d+)?)
       captures:
-        1: operator.number
-        2: unsigned.number
+        1: operator.number.Thulium
+        2: unsigned.number.Thulium
 

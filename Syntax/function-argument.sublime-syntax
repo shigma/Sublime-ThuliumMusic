@@ -12,30 +12,30 @@ contexts:
     - match: (?=[;\)])
       pop: true
     - match: ','
-      scope: bracket.function
+      scope: bracket.function.Thulium
     - include: number.sublime-syntax
     - match: \{(\d+\*)?
-      scope: subtrack.track
+      scope: subtrack.track.Thulium
       push:
         - match: \}
-          scope: subtrack.track
+          scope: subtrack.track.Thulium
           pop: true
         - include: track-general.sublime-syntax
     - match: \[
-      scope: bracket.function
+      scope: bracket.function.Thulium
       push: 
         - match: \]
-          scope: bracket.function
+          scope: bracket.function.Thulium
           pop: true
         - include: function.argument
     - match: \"
-      scope: bracket.function
+      scope: bracket.function.Thulium
       push: 
         - match: \"
-          scope: bracket.function
+          scope: bracket.function.Thulium
           pop: true
         - match: \\.
-          scope: number.expression
+          scope: number.expression.Thulium
         - match: .
-          scope: number.expression
+          scope: number.expression.Thulium
 

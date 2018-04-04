@@ -15,70 +15,70 @@ contexts:
     # keyword: 命令的关键字
     # argument: 命令的参数
     - match: '[Ee]nd|[Tt]rack'
-      scope: keyword.command
+      scope: keyword.command.Thulium
       push:
         - match: \S+
-          scope: invalid.command
+          scope: invalid.command.Thulium
         - match: $
           pop: true
     - match: '[Ii]nclude'
-      scope: keyword.command
+      scope: keyword.command.Thulium
       push:
         - match: ([<\"])([^>]*)([\">])
           captures:
-            1: marker.command
-            2: argument.command
-            3: marker.command
+            1: marker.command.Thulium
+            2: argument.command.Thulium
+            3: marker.command.Thulium
         - match: \S+
-          scope: invalid.command
+          scope: invalid.command.Thulium
         - match: $
           pop: true
     - match: '[Cc]hord'
-      scope: keyword.command
+      scope: keyword.command.Thulium
       push:
-        - include: library.chord
+        - include: library.chord.Thulium
         - match: ^#
-          scope: marker.command
+          scope: marker.command.Thulium
           pop: true
         - match: \S+
-          scope: invalid.command
+          scope: invalid.command.Thulium
     - match: '[Ff]unction'
-      scope: keyword.command
+      scope: keyword.command.Thulium
       push: JavaScript.sublime-syntax
       with_prototype:
         - match: ^#
-          scope: marker.command
+          scope: marker.command.Thulium
           pop: true
     - match: '\S+(?=[ \t])'
-      scope: invalid.command
+      scope: invalid.command.Thulium
     - match: $
       pop: true
 
   library.chord:
     - match: ^[a-zA-Z](?=[\n\t])
-      scope: pitchdop.note
+      scope: pitchdop.note.Thulium
       push: 
         - match: \t+([^\t]+\t+)?
-          scope: description.library
+          scope: description.library.Thulium
         - match: \[(?=.*\])
-          scope: bracket.note
+          scope: bracket.note.Thulium
           push:
             - include: number.integer
             - match: ';'
-              scope: bracket.note
+              scope: bracket.note.Thulium
             - match: \]
-              scope: bracket.note
+              scope: bracket.note.Thulium
               pop: true
         - include: number.integer
         - match: ','
-          scope: bracket.note 
+          scope: bracket.note.Thulium
         - match: $
           pop: true
     - match: ^[^#\n\t].*
-      scope: invalid.library
+      scope: invalid.library.Thulium
   
   number.integer:
     - match: ([+\-]?)(\d+(\.\d+)?)
       captures:
-        1: operator.number
-        2: unsigned.number
+        1: operator.number.Thulium
+        2: unsigned.number.Thulium

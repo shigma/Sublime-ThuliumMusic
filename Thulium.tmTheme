@@ -600,7 +600,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#66DDFF</string>
+				<string>#77DDFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -609,7 +609,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#88BBFF</string>
+				<string>#99BBFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -618,7 +618,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#66FFDD</string>
+				<string>#77EEEE</string>
 			</dict>
 		</dict>
 		<dict>
@@ -627,7 +627,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#88DDDD</string>
+				<string>#99CCEE</string>
 			</dict>
 		</dict>
 
@@ -639,7 +639,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#99FF22</string>
+				<string>#FF8866</string>
 			</dict>
 		</dict>
 		<dict>
@@ -648,7 +648,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFDD44</string>
+				<string>#FFBB33</string>
 			</dict>
 		</dict>
 		<dict>
@@ -657,7 +657,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#CCFF66</string>
+				<string>#FFBB66</string>
 			</dict>
 		</dict>
 
@@ -671,7 +671,7 @@
 				<key>fontStyle</key>
 				<string>bold</string>
 				<key>foreground</key>
-				<string>#DD88FF</string>
+				<string>#DDAACC</string>
 			</dict>
 		</dict>
 		<dict>
@@ -680,7 +680,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#DD88FF</string>
+				<string>#DDAABB</string>
 			</dict>
 		</dict>
 		<dict>
@@ -689,7 +689,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#DDBBFF</string>
+				<string>#FF8899</string>
 			</dict>
 		</dict>
 		<dict>
@@ -700,7 +700,7 @@
 				<key>fontStyle</key>
 				<string>bold</string>
 				<key>foreground</key>
-				<string>#DDBBFF</string>
+				<string>#DDAABB</string>
 			</dict>
 		</dict>
 		<dict>
@@ -709,7 +709,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF00BB</string>
+				<string>#FF44BB</string>
 			</dict>
 		</dict>
 		<dict>
@@ -718,7 +718,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF88BB</string>
+				<string>#FF66BB</string>
 			</dict>
 		</dict>
 		<dict>
@@ -804,7 +804,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFEE33</string>
+				<string>#FFDD33</string>
 			</dict>
 		</dict>
 		<dict>

@@ -1,245 +1,65 @@
 {
 	"scope": "meta.track.Thulium",
 	"completions": [
-		{
-			"trigger": "BassDrum",
-			"contents": "BassDrum"
-		},
-		{
-			"trigger": "BassDrum2",
-			"contents": "BassDrum2"
-		},
-		{
-			"trigger": "BellTree",
-			"contents": "BellTree"
-		},
-		{
-			"trigger": "Cabasa",
-			"contents": "Cabasa"
-		},
-		{
-			"trigger": "Castanets",
-			"contents": "Castanets"
-		},
-		{
-			"trigger": "ChineseCymbal",
-			"contents": "ChineseCymbal"
-		},
-		{
-			"trigger": "Clap",
-			"contents": "Clap"
-		},
-		{
-			"trigger": "Claves",
-			"contents": "Claves"
-		},
-		{
-			"trigger": "Cowbell",
-			"contents": "Cowbell"
-		},
-		{
-			"trigger": "CrashCymbal",
-			"contents": "CrashCymbal"
-		},
-		{
-			"trigger": "CrashCymbal2",
-			"contents": "CrashCymbal2"
-		},
-		{
-			"trigger": "ElectricSnare",
-			"contents": "ElectricSnare"
-		},
-		{
-			"trigger": "GuiroLong",
-			"contents": "GuiroLong"
-		},
-		{
-			"trigger": "GuiroShort",
-			"contents": "GuiroShort"
-		},
-		{
-			"trigger": "HighAgogo",
-			"contents": "HighAgogo"
-		},
-		{
-			"trigger": "HighBongo",
-			"contents": "HighBongo"
-		},
-		{
-			"trigger": "HighCongaMute",
-			"contents": "HighCongaMute"
-		},
-		{
-			"trigger": "HighCongaOpen",
-			"contents": "HighCongaOpen"
-		},
-		{
-			"trigger": "HighFloorTom",
-			"contents": "HighFloorTom"
-		},
-		{
-			"trigger": "HighTimbale",
-			"contents": "HighTimbale"
-		},
-		{
-			"trigger": "HighTom",
-			"contents": "HighTom"
-		},
-		{
-			"trigger": "HighWoodblock",
-			"contents": "HighWoodblock"
-		},
-		{
-			"trigger": "HiHatClosed",
-			"contents": "HiHatClosed"
-		},
-		{
-			"trigger": "HiHatOpen",
-			"contents": "HiHatOpen"
-		},
-		{
-			"trigger": "HiHatPedal",
-			"contents": "HiHatPedal"
-		},
-		{
-			"trigger": "JingleBell",
-			"contents": "JingleBell"
-		},
-		{
-			"trigger": "LowAgogo",
-			"contents": "LowAgogo"
-		},
-		{
-			"trigger": "LowBongo",
-			"contents": "LowBongo"
-		},
-		{
-			"trigger": "LowConga",
-			"contents": "LowConga"
-		},
-		{
-			"trigger": "LowFloorTom",
-			"contents": "LowFloorTom"
-		},
-		{
-			"trigger": "LowTimbale",
-			"contents": "LowTimbale"
-		},
-		{
-			"trigger": "LowTom",
-			"contents": "LowTom"
-		},
-		{
-			"trigger": "LowWoodblock",
-			"contents": "LowWoodblock"
-		},
-		{
-			"trigger": "Maracas",
-			"contents": "Maracas"
-		},
-		{
-			"trigger": "MetronomeBell",
-			"contents": "MetronomeBell"
-		},
-		{
-			"trigger": "MetronomeClick",
-			"contents": "MetronomeClick"
-		},
-		{
-			"trigger": "MidTom",
-			"contents": "MidTom"
-		},
-		{
-			"trigger": "MidTom2",
-			"contents": "MidTom2"
-		},
-		{
-			"trigger": "MuteCuica",
-			"contents": "MuteCuica"
-		},
-		{
-			"trigger": "MuteSurdo",
-			"contents": "MuteSurdo"
-		},
-		{
-			"trigger": "MuteTriangle",
-			"contents": "MuteTriangle"
-		},
-		{
-			"trigger": "OpenCuica",
-			"contents": "OpenCuica"
-		},
-		{
-			"trigger": "OpenSurdo",
-			"contents": "OpenSurdo"
-		},
-		{
-			"trigger": "OpenTriangle",
-			"contents": "OpenTriangle"
-		},
-		{
-			"trigger": "RideBell",
-			"contents": "RideBell"
-		},
-		{
-			"trigger": "RideCymbal",
-			"contents": "RideCymbal"
-		},
-		{
-			"trigger": "RideCymbal2",
-			"contents": "RideCymbal2"
-		},
-		{
-			"trigger": "ScratchPull",
-			"contents": "ScratchPull"
-		},
-		{
-			"trigger": "ScratchPush",
-			"contents": "ScratchPush"
-		},
-		{
-			"trigger": "Shaker",
-			"contents": "Shaker"
-		},
-		{
-			"trigger": "SideStick",
-			"contents": "SideStick"
-		},
-		{
-			"trigger": "Slap",
-			"contents": "Slap"
-		},
-		{
-			"trigger": "Snare",
-			"contents": "Snare"
-		},
-		{
-			"trigger": "SplashCymbal",
-			"contents": "SplashCymbal"
-		},
-		{
-			"trigger": "SquareClick",
-			"contents": "SquareClick"
-		},
-		{
-			"trigger": "Sticks",
-			"contents": "Sticks"
-		},
-		{
-			"trigger": "Tambourine",
-			"contents": "Tambourine"
-		},
-		{
-			"trigger": "Vibraslap",
-			"contents": "Vibraslap"
-		},
-		{
-			"trigger": "WhistleLong",
-			"contents": "WhistleLong"
-		},
-		{
-			"trigger": "WhistleShort",
-			"contents": "WhistleShort"
-		}
+		"BassDrum",
+		"BassDrum2",
+		"BellTree",
+		"Cabasa",
+		"Castanets",
+		"ChineseCymbal",
+		"Clap",
+		"Claves",
+		"Cowbell",
+		"CrashCymbal",
+		"CrashCymbal2",
+		"ElectricSnare",
+		"GuiroLong",
+		"GuiroShort",
+		"HighAgogo",
+		"HighBongo",
+		"HighCongaMute",
+		"HighCongaOpen",
+		"HighFloorTom",
+		"HighTimbale",
+		"HighTom",
+		"HighWoodblock",
+		"HiHatClosed",
+		"HiHatOpen",
+		"HiHatPedal",
+		"JingleBell",
+		"LowAgogo",
+		"LowBongo",
+		"LowConga",
+		"LowFloorTom",
+		"LowTimbale",
+		"LowTom",
+		"LowWoodblock",
+		"Maracas",
+		"MetronomeBell",
+		"MetronomeClick",
+		"MidTom",
+		"MidTom2",
+		"MuteCuica",
+		"MuteSurdo",
+		"MuteTriangle",
+		"OpenCuica",
+		"OpenSurdo",
+		"OpenTriangle",
+		"RideBell",
+		"RideCymbal",
+		"RideCymbal2",
+		"ScratchPull",
+		"ScratchPush",
+		"Shaker",
+		"SideStick",
+		"Slap",
+		"Snare",
+		"SplashCymbal",
+		"SquareClick",
+		"Sticks",
+		"Tambourine",
+		"Vibraslap",
+		"WhistleLong",
+		"WhistleShort"
 	]
 }

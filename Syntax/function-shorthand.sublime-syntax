@@ -12,7 +12,6 @@ contexts:
     # name: 函数名
     # identifier: 简记法标识符
     # bracket: 函数括号
-    - meta_include_prototype: false
     - match: \)
       scope: bracket.function
       pop: true
@@ -26,6 +25,5 @@ contexts:
     - include: function.packages
 
   function.packages:
-    - meta_include_prototype: false
     - include: package-standard.sublime-syntax
 

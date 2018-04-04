@@ -1,517 +1,133 @@
 {
 	"scope": "meta.track.Thulium",
 	"completions": [
-		{
-			"trigger": "Piano",
-			"contents": "Piano"
-		},
-		{
-			"trigger": "BrightPiano",
-			"contents": "BrightPiano"
-		},
-		{
-			"trigger": "ElectricGrandPiano",
-			"contents": "ElectricGrandPiano"
-		},
-		{
-			"trigger": "HonkyTonkPiano",
-			"contents": "HonkyTonkPiano"
-		},
-		{
-			"trigger": "ElectricPiano",
-			"contents": "ElectricPiano"
-		},
-		{
-			"trigger": "ElectricPiano2",
-			"contents": "ElectricPiano2"
-		},
-		{
-			"trigger": "Harpsichord",
-			"contents": "Harpsichord"
-		},
-		{
-			"trigger": "Clavi",
-			"contents": "Clavi"
-		},
-		{
-			"trigger": "Celesta",
-			"contents": "Celesta"
-		},
-		{
-			"trigger": "Glockenspiel",
-			"contents": "Glockenspiel"
-		},
-		{
-			"trigger": "MusicBox",
-			"contents": "MusicBox"
-		},
-		{
-			"trigger": "Vibraphone",
-			"contents": "Vibraphone"
-		},
-		{
-			"trigger": "Marimba",
-			"contents": "Marimba"
-		},
-		{
-			"trigger": "Xylophone",
-			"contents": "Xylophone"
-		},
-		{
-			"trigger": "TubularBells",
-			"contents": "TubularBells"
-		},
-		{
-			"trigger": "Dulcimer",
-			"contents": "Dulcimer"
-		},
-		{
-			"trigger": "DrawbarOrgan",
-			"contents": "DrawbarOrgan"
-		},
-		{
-			"trigger": "PercussiveOrgan",
-			"contents": "PercussiveOrgan"
-		},
-		{
-			"trigger": "RockOrgan",
-			"contents": "RockOrgan"
-		},
-		{
-			"trigger": "Organ",
-			"contents": "Organ"
-		},
-		{
-			"trigger": "ReedOrgan",
-			"contents": "ReedOrgan"
-		},
-		{
-			"trigger": "Accordion",
-			"contents": "Accordion"
-		},
-		{
-			"trigger": "Harmonica",
-			"contents": "Harmonica"
-		},
-		{
-			"trigger": "Bandoneon",
-			"contents": "Bandoneon"
-		},
-		{
-			"trigger": "Guitar",
-			"contents": "Guitar"
-		},
-		{
-			"trigger": "SteelGuitar",
-			"contents": "SteelGuitar"
-		},
-		{
-			"trigger": "JazzGuitar",
-			"contents": "JazzGuitar"
-		},
-		{
-			"trigger": "ElectricGuitar",
-			"contents": "ElectricGuitar"
-		},
-		{
-			"trigger": "GuitarMuted",
-			"contents": "GuitarMuted"
-		},
-		{
-			"trigger": "GuitarOverdriven",
-			"contents": "GuitarOverdriven"
-		},
-		{
-			"trigger": "GuitarDistorted",
-			"contents": "GuitarDistorted"
-		},
-		{
-			"trigger": "GuitarHarmonics",
-			"contents": "GuitarHarmonics"
-		},
-		{
-			"trigger": "Bass",
-			"contents": "Bass"
-		},
-		{
-			"trigger": "ElectricBass",
-			"contents": "ElectricBass"
-		},
-		{
-			"trigger": "PickedBass",
-			"contents": "PickedBass"
-		},
-		{
-			"trigger": "FretlessBass",
-			"contents": "FretlessBass"
-		},
-		{
-			"trigger": "SlapBass",
-			"contents": "SlapBass"
-		},
-		{
-			"trigger": "SlapBass2",
-			"contents": "SlapBass2"
-		},
-		{
-			"trigger": "SynthBass",
-			"contents": "SynthBass"
-		},
-		{
-			"trigger": "SynthBass2",
-			"contents": "SynthBass2"
-		},
-		{
-			"trigger": "Violin",
-			"contents": "Violin"
-		},
-		{
-			"trigger": "Viola",
-			"contents": "Viola"
-		},
-		{
-			"trigger": "Cello",
-			"contents": "Cello"
-		},
-		{
-			"trigger": "Contrabass",
-			"contents": "Contrabass"
-		},
-		{
-			"trigger": "TremoloStrings",
-			"contents": "TremoloStrings"
-		},
-		{
-			"trigger": "PizzicatoStrings",
-			"contents": "PizzicatoStrings"
-		},
-		{
-			"trigger": "Harp",
-			"contents": "Harp"
-		},
-		{
-			"trigger": "Timpani",
-			"contents": "Timpani"
-		},
-		{
-			"trigger": "Strings",
-			"contents": "Strings"
-		},
-		{
-			"trigger": "Strings2",
-			"contents": "Strings2"
-		},
-		{
-			"trigger": "SynthStrings",
-			"contents": "SynthStrings"
-		},
-		{
-			"trigger": "SynthStrings2",
-			"contents": "SynthStrings2"
-		},
-		{
-			"trigger": "VoiceAahs",
-			"contents": "VoiceAahs"
-		},
-		{
-			"trigger": "VoiceOohs",
-			"contents": "VoiceOohs"
-		},
-		{
-			"trigger": "Voice",
-			"contents": "Voice"
-		},
-		{
-			"trigger": "OrchestraHit",
-			"contents": "OrchestraHit"
-		},
-		{
-			"trigger": "Trumpet",
-			"contents": "Trumpet"
-		},
-		{
-			"trigger": "Trombone",
-			"contents": "Trombone"
-		},
-		{
-			"trigger": "Tuba",
-			"contents": "Tuba"
-		},
-		{
-			"trigger": "MutedTrumpet",
-			"contents": "MutedTrumpet"
-		},
-		{
-			"trigger": "FrenchHorn",
-			"contents": "FrenchHorn"
-		},
-		{
-			"trigger": "BrassSection",
-			"contents": "BrassSection"
-		},
-		{
-			"trigger": "SynthBrass",
-			"contents": "SynthBrass"
-		},
-		{
-			"trigger": "SynthBrass2",
-			"contents": "SynthBrass2"
-		},
-		{
-			"trigger": "SopranoSax",
-			"contents": "SopranoSax"
-		},
-		{
-			"trigger": "AltoSax",
-			"contents": "AltoSax"
-		},
-		{
-			"trigger": "TenorSax",
-			"contents": "TenorSax"
-		},
-		{
-			"trigger": "BaritoneSax",
-			"contents": "BaritoneSax"
-		},
-		{
-			"trigger": "Oboe",
-			"contents": "Oboe"
-		},
-		{
-			"trigger": "EnglishHorn",
-			"contents": "EnglishHorn"
-		},
-		{
-			"trigger": "Bassoon",
-			"contents": "Bassoon"
-		},
-		{
-			"trigger": "Clarinet",
-			"contents": "Clarinet"
-		},
-		{
-			"trigger": "Piccolo",
-			"contents": "Piccolo"
-		},
-		{
-			"trigger": "Flute",
-			"contents": "Flute"
-		},
-		{
-			"trigger": "Recorder",
-			"contents": "Recorder"
-		},
-		{
-			"trigger": "PanFlute",
-			"contents": "PanFlute"
-		},
-		{
-			"trigger": "BlownBottle",
-			"contents": "BlownBottle"
-		},
-		{
-			"trigger": "Shakuhachi",
-			"contents": "Shakuhachi"
-		},
-		{
-			"trigger": "Whistle",
-			"contents": "Whistle"
-		},
-		{
-			"trigger": "Ocarina",
-			"contents": "Ocarina"
-		},
-		{
-			"trigger": "Square",
-			"contents": "Square"
-		},
-		{
-			"trigger": "Sawtooth",
-			"contents": "Sawtooth"
-		},
-		{
-			"trigger": "Calliope",
-			"contents": "Calliope"
-		},
-		{
-			"trigger": "Chiff",
-			"contents": "Chiff"
-		},
-		{
-			"trigger": "Charang",
-			"contents": "Charang"
-		},
-		{
-			"trigger": "SynthVoice",
-			"contents": "SynthVoice"
-		},
-		{
-			"trigger": "Fifths",
-			"contents": "Fifths"
-		},
-		{
-			"trigger": "BassAndLead",
-			"contents": "BassAndLead"
-		},
-		{
-			"trigger": "NewAge",
-			"contents": "NewAge"
-		},
-		{
-			"trigger": "Warm",
-			"contents": "Warm"
-		},
-		{
-			"trigger": "Polysynth",
-			"contents": "Polysynth"
-		},
-		{
-			"trigger": "Choir",
-			"contents": "Choir"
-		},
-		{
-			"trigger": "Bowed",
-			"contents": "Bowed"
-		},
-		{
-			"trigger": "Metallic",
-			"contents": "Metallic"
-		},
-		{
-			"trigger": "Halo",
-			"contents": "Halo"
-		},
-		{
-			"trigger": "Sweep",
-			"contents": "Sweep"
-		},
-		{
-			"trigger": "Rain",
-			"contents": "Rain"
-		},
-		{
-			"trigger": "Soundtrack",
-			"contents": "Soundtrack"
-		},
-		{
-			"trigger": "Crystal",
-			"contents": "Crystal"
-		},
-		{
-			"trigger": "Atmosphere",
-			"contents": "Atmosphere"
-		},
-		{
-			"trigger": "Brightness",
-			"contents": "Brightness"
-		},
-		{
-			"trigger": "Goblins",
-			"contents": "Goblins"
-		},
-		{
-			"trigger": "Echoes",
-			"contents": "Echoes"
-		},
-		{
-			"trigger": "SciFi",
-			"contents": "SciFi"
-		},
-		{
-			"trigger": "Sitar",
-			"contents": "Sitar"
-		},
-		{
-			"trigger": "Banjo",
-			"contents": "Banjo"
-		},
-		{
-			"trigger": "Shamisen",
-			"contents": "Shamisen"
-		},
-		{
-			"trigger": "Koto",
-			"contents": "Koto"
-		},
-		{
-			"trigger": "Kalimba",
-			"contents": "Kalimba"
-		},
-		{
-			"trigger": "Bagpipe",
-			"contents": "Bagpipe"
-		},
-		{
-			"trigger": "Fiddle",
-			"contents": "Fiddle"
-		},
-		{
-			"trigger": "Shanai",
-			"contents": "Shanai"
-		},
-		{
-			"trigger": "Tinklebell",
-			"contents": "Tinklebell"
-		},
-		{
-			"trigger": "Agogo",
-			"contents": "Agogo"
-		},
-		{
-			"trigger": "Steeldrums",
-			"contents": "Steeldrums"
-		},
-		{
-			"trigger": "Woodblock",
-			"contents": "Woodblock"
-		},
-		{
-			"trigger": "Taiko",
-			"contents": "Taiko"
-		},
-		{
-			"trigger": "MelodicTom",
-			"contents": "MelodicTom"
-		},
-		{
-			"trigger": "SynthDrum",
-			"contents": "SynthDrum"
-		},
-		{
-			"trigger": "ReverseCymbal",
-			"contents": "ReverseCymbal"
-		},
-		{
-			"trigger": "FretNoise",
-			"contents": "FretNoise"
-		},
-		{
-			"trigger": "Breath",
-			"contents": "Breath"
-		},
-		{
-			"trigger": "Seashore",
-			"contents": "Seashore"
-		},
-		{
-			"trigger": "Bird",
-			"contents": "Bird"
-		},
-		{
-			"trigger": "Telephone",
-			"contents": "Telephone"
-		},
-		{
-			"trigger": "Helicopter",
-			"contents": "Helicopter"
-		},
-		{
-			"trigger": "Applause",
-			"contents": "Applause"
-		},
-		{
-			"trigger": "Gunshot",
-			"contents": "Gunshot"
-		}
+		"Piano",
+		"BrightPiano",
+		"ElectricGrandPiano",
+		"HonkyTonkPiano",
+		"ElectricPiano",
+		"ElectricPiano2",
+		"Harpsichord",
+		"Clavi",
+		"Celesta",
+		"Glockenspiel",
+		"MusicBox",
+		"Vibraphone",
+		"Marimba",
+		"Xylophone",
+		"TubularBells",
+		"Dulcimer",
+		"DrawbarOrgan",
+		"PercussiveOrgan",
+		"RockOrgan",
+		"Organ",
+		"ReedOrgan",
+		"Accordion",
+		"Harmonica",
+		"Bandoneon",
+		"Guitar",
+		"SteelGuitar",
+		"JazzGuitar",
+		"ElectricGuitar",
+		"GuitarMuted",
+		"GuitarOverdriven",
+		"GuitarDistorted",
+		"GuitarHarmonics",
+		"Bass",
+		"ElectricBass",
+		"PickedBass",
+		"FretlessBass",
+		"SlapBass",
+		"SlapBass2",
+		"SynthBass",
+		"SynthBass2",
+		"Violin",
+		"Viola",
+		"Cello",
+		"Contrabass",
+		"TremoloStrings",
+		"PizzicatoStrings",
+		"Harp",
+		"Timpani",
+		"Strings",
+		"Strings2",
+		"SynthStrings",
+		"SynthStrings2",
+		"VoiceAahs",
+		"VoiceOohs",
+		"Voice",
+		"OrchestraHit",
+		"Trumpet",
+		"Trombone",
+		"Tuba",
+		"MutedTrumpet",
+		"FrenchHorn",
+		"BrassSection",
+		"SynthBrass",
+		"SynthBrass2",
+		"SopranoSax",
+		"AltoSax",
+		"TenorSax",
+		"BaritoneSax",
+		"Oboe",
+		"EnglishHorn",
+		"Bassoon",
+		"Clarinet",
+		"Piccolo",
+		"Flute",
+		"Recorder",
+		"PanFlute",
+		"BlownBottle",
+		"Shakuhachi",
+		"Whistle",
+		"Ocarina",
+		"Square",
+		"Sawtooth",
+		"Calliope",
+		"Chiff",
+		"Charang",
+		"SynthVoice",
+		"Fifths",
+		"BassAndLead",
+		"NewAge",
+		"Warm",
+		"Polysynth",
+		"Choir",
+		"Bowed",
+		"Metallic",
+		"Halo",
+		"Sweep",
+		"Rain",
+		"Soundtrack",
+		"Crystal",
+		"Atmosphere",
+		"Brightness",
+		"Goblins",
+		"Echoes",
+		"SciFi",
+		"Sitar",
+		"Banjo",
+		"Shamisen",
+		"Koto",
+		"Kalimba",
+		"Bagpipe",
+		"Fiddle",
+		"Shanai",
+		"Tinklebell",
+		"Agogo",
+		"Steeldrums",
+		"Woodblock",
+		"Taiko",
+		"MelodicTom",
+		"SynthDrum",
+		"ReverseCymbal",
+		"FretNoise",
+		"Breath",
+		"Seashore",
+		"Bird",
+		"Telephone",
+		"Helicopter",
+		"Applause",
+		"Gunshot"
 	]
 }

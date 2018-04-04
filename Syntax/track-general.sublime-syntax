@@ -39,7 +39,7 @@ contexts:
       push: function-shorthand.sublime-syntax
     - match: '[~\$]'
       scope: identifier.function
-    - match: '[!&*\^]'
+    - match: '[!&*\^+s]'
       scope: operator.track
     - match: '(\|)(\|:)'
       captures:
@@ -49,20 +49,23 @@ contexts:
       captures:
         1: barline-plain.track
         2: barline.track
-    - match: \{(\d+\*)?
-      scope: subtrack.track
+    - match: (\{)(?:(\d+)(\*))?
+      captures:
+        1: subtrack.track
+        2: repeat-number.track
+        3: repeat.track
       push:
         - match: \}
           scope: subtrack.track
           pop: true
         - include: track.general
-    - match: '[\|/+s]'
+    - match: '[\|/]'
       scope: barline.track
     - match: \\(?=({{span}}(,{{span}})*)?:)
       scope: barline.track
       push: 
         - match: ':'
-          scope: barline.track
+          scope: repeat.track
           pop: true
         - match: '[~,]'
           scope: repeat.track

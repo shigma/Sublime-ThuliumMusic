@@ -1,7 +1,6 @@
 import sublime
 import sublime_plugin
-
-from .Scopes import tmScope
+from .Assets import *
 
 def get_key_region_at(view, point):
     if view.match_selector(point, tmScope.function):
@@ -23,17 +22,15 @@ class tmDocument(sublime_plugin.ViewEventListener):
 
         key = self.view.substr(key_region)
         body = "哈哈哈: {0}, {1}".format(key_region.a, key_region.b)
-
-        # offset <h1> padding, if possible
         window_width = min(1000, int(self.view.viewport_extent()[0]) - 64)
-        
         key_start = key_region.begin()
         location = max(key_start - 1, self.view.line(key_start).begin())
 
         self.view.show_popup(
-            content = body,
+            content = get_template('Document').format('<h1>'+body+'</h1>'),
             location = location,
             max_width = window_width,
-            flags = sublime.HIDE_ON_MOUSE_MOVE_AWAY | sublime.COOPERATE_WITH_AUTO_COMPLETE
+            flags = sublime.HIDE_ON_MOUSE_MOVE_AWAY 
+                  | sublime.COOPERATE_WITH_AUTO_COMPLETE
         )
 

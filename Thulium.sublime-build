@@ -1,0 +1,11 @@
+{
+  "cmd": [],
+  "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+  "selector": "source.Thulium",
+  "shell": true,
+  "encoding": "utf8",
+  "working_dir": "$packages/Thulium/Plugins",
+  "windows": {
+    "shell_cmd": "taskkill /F /IM node.exe & node Build $file"
+  }
+}

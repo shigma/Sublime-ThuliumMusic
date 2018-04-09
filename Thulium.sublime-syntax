@@ -58,7 +58,7 @@ contexts:
     # bracket: 尖括号
     # name: 音轨名
     # instrument: 乐器声明
-    - match: <:?
+    - match: <:?(?=[a-zA-Z>])
       scope: bracket.track.Thulium
       push: track.meta
     - match: :?>

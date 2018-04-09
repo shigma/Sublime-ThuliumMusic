@@ -8,15 +8,6 @@ variables:
 
 contexts:
 
-  prototype:
-    - match:  <\*
-      scope: marker.comment.Thulium
-      push: 
-        - meta_scope: track.comment.Thulium
-        - match: \*>
-          scope: marker.comment.Thulium
-          pop: true
-
   main:
     - include: track.general
 
@@ -34,6 +25,13 @@ contexts:
           scope: bracket.function.Thulium
           pop: true
         - include: function-argument.sublime-syntax
+    - match:  <\*
+      scope: marker.comment.Thulium
+      push: 
+        - meta_scope: track.comment.Thulium
+        - match: \*>
+          scope: marker.comment.Thulium
+          pop: true
     - match: '\('
       scope: bracket.function.Thulium
       push: function-shorthand.sublime-syntax

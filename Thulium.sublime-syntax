@@ -61,12 +61,9 @@ contexts:
     - match: <:?
       scope: bracket.track.Thulium
       push: track.meta
-      with_prototype:
-        - match: (?=:?>)
-          scope: bracket.track.Thulium
-          pop: true
     - match: :?>
       scope: bracket.track.Thulium
+      pop: true
     - match: (?=.)
       push: track-general.sublime-syntax
       with_prototype:
@@ -75,21 +72,22 @@ contexts:
 
   track.meta:
     - meta_scope: meta.track.Thulium
-    - match: '[a-zA-Z]\w*(?=:)'
-      scope: name.track.Thulium
-    - match: '[:,]'
+    - match: (?=:?>)
+      scope: bracket.track.Thulium
+      pop: true
+    - match: '(:)?([a-zA-Z]\w*)(:)'
+      captures:
+        1: bracket.track.Thulium
+        2: name.track.Thulium
+        3: bracket.track.Thulium
+    - match: ','
       scope: bracket.track
-    - match: '[a-zA-Z]\w*(?!:)'
+
+    - match: '[a-zA-Z]\w*'
       scope: instrument.track.Thulium
-    - match: \(
-      scope: bracket.function.Thulium
-      push: function-shorthand.sublime-syntax
-    - match: \{
-      scope: subtrack.track
-      push: 
-        - match: \}
-          scope: subtrack.track
+      push: track-general.sublime-syntax
+      with_prototype: 
+        - match: (?=[,>])
           pop: true
-        - include: track-general.sublime-syntax
 
 

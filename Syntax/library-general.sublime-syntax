@@ -14,7 +14,7 @@ contexts:
     # marker: 命令前的#号
     # keyword: 命令的关键字
     # argument: 命令的参数
-    - match: '[Ee]nd|[Tt]rack'
+    - match: '[Ee]nd'
       scope: keyword.command.Thulium
       push:
         - match: \S+
@@ -24,7 +24,10 @@ contexts:
     - match: '[Ii]nclude'
       scope: keyword.command.Thulium
       push:
-        - match: ([<\"])([^>]*)([\">])
+        - meta_scope: include.Thulium
+        - match: '[a-zA-Z]\w*'
+          scope: argument.command.Thulium
+        - match: (")((?:[^"]|\\.)*)(")
           captures:
             1: marker.command.Thulium
             2: argument.command.Thulium
@@ -36,7 +39,7 @@ contexts:
     - match: '[Cc]hord'
       scope: keyword.command.Thulium
       push:
-        - include: library.chord.Thulium
+        - include: library.chord
         - match: ^#
           scope: marker.command.Thulium
           pop: true
@@ -64,7 +67,7 @@ contexts:
           scope: bracket.note.Thulium
           push:
             - include: number.integer
-            - match: ';'
+            - match: ':'
               scope: bracket.note.Thulium
             - match: \]
               scope: bracket.note.Thulium

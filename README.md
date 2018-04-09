@@ -1,9 +1,15 @@
-# sublime_support_ThuliumMusic
-##2018-3-24
-###介绍
-1. 文件为sublime text3 对[thuliumMusicPlayer](https://github.com/obstudio/ThuliumMusicPlayer-WL)的支持，包含语法文件、配色方案等
-###使用方法
-1. 在C:\Users\\<UserName\>\AppData\Roaming\Sublime Text 3\Packages下新建文件夹，直接将改文件作为仓库。
-2. 点开sublime text3上preferences->setting，将右侧user中颜色主题修改为："color_scheme": "Packages/textMusic/Thulium.tmTheme",
-###说明
-1. 如果您使用出Monokai外的颜色主题，先等等吧。
+# Sublime Text 3 support for Thulium Music
+
+本仓库提供了 Thulium 语言的 Sublime 支持。要了解 Thulium 语言，请前往[ThuliumMusicPlayer](https://github.com/obstudio/ThuliumMusicPlayer-WL)。
+
+## 支持 / Support
+- Thulium 语言的语法识别和配色（使用基于 Monokai 的配色方案）
+- Thulium 基础语法，官方包函数以及常用乐器的自动补全功能
+
+## 配置 / Configuration
+
+1. 在 AppData\Roaming\Sublime Text 3\Packages 下新建 Thulium 文件夹，将本仓库下载到这个文件夹下。
+2. 运行 Sublime Text 3，在菜单中选择 Preferences -> Color Scheme -> Thulium；或者在菜单中选择 Preferences -> Setting，将右侧 User 中`color_scheme`一项修改为`Packages/Thulium/Thulium.tmTheme`（如果没有则添加这一项）。
+
+
+

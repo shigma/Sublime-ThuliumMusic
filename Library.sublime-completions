@@ -14,12 +14,12 @@
             "contents": "Chord \n\n"
         },
         {
-            "trigger": "Track",
-            "contents": "Track \n\n"
+            "trigger": "Settings",
+            "contents": "Settings \n\n"
         },
         {
             "trigger": "Include",
-            "contents": "Include <${1:}>\n\n$0"
+            "contents": "Include "
         }
 	]
 }

@@ -2,5 +2,9 @@
   {
     "caption": "Thulium: Tokenize",
     "command": "build"
+  },
+  {
+    "caption": "Thulium: Set Kernel Path",
+    "command": "tm_set_kernel_path"
   }
 ]

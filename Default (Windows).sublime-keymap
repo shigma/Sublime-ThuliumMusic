@@ -33,9 +33,13 @@
   },
 
   // Test
-  { 
+  {
     "keys": ["ctrl+t"],
     "command": "show_overlay",
     "args": {"overlay": "command_palette", "text": "Thulium: "}
+  },
+  {
+    "keys": ["ctrl+q"],
+    "command": "tm_tokenize"
   }
 ]

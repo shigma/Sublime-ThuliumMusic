@@ -6,6 +6,13 @@ class tmScope:
 
 path = os.environ['APPDATA'] + '/Sublime Text 3/Packages/Thulium/'
 
+config_path = path + 'Plugins/Config.json'
+
+if not os.path.isfile(config_path):
+    file = open(self.config_path, 'w')
+    file.write("{}")
+    file.close()
+
 def get_template(filename):
     with open(path + 'Plugins/' + filename + '.css') as css:
         return '''

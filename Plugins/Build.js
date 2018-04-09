@@ -1,22 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 const process = require('process');
-try {
-	const tm = require('../index');
-} catch (err) {
-	console.log(err);
+const tm = require('./Config.json');
+
+if (!tm.Kernel) {
+    console.log('Cannot find Thulium kernel.');
+    throw 'Cannot find Thulium kernel.';
 }
-// const Tokenizer = require('../Library/Token/Tokenizer');
+
+const KernelPath = path.join(tm.Kernel + '/Library');
+const Tokenizer = require(KernelPath + '/Token/Tokenizer');
 
 const input = process.argv.slice(2);
 
-if (input[0] && input[0] != '-h') {
-    // const test = new Tokenizer(input[0], 'URL');
-    // console.log(test.tokenize());
-    console.log(input[0]);
-} else {
-    console.log(`
-    usage
-    `);
+if (input[0]) {
+    const test = new Tokenizer(input[0], 'URL');
+    console.log(test.tokenize());
 }
 

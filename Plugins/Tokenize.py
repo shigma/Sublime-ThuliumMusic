@@ -15,23 +15,22 @@ class tmTokenizeCommand(sublime_plugin.WindowCommand):
 			file = self.sheet_view.file_name(),
 			args = args
 		)
-		self.result = subprocess.Popen(command, 
+		self.result = subprocess.Popen(command,
 			stdout = subprocess.PIPE,
 			stderr = subprocess.PIPE,
 			shell = True
 		)
 
-		output = self.result.stdout.read().decode('utf-8')
 		self.window.status_message(command)
+		output = self.result.stdout.read().decode('utf-8')
+		error = self.result.stderr.read().decode('utf-8')
 
 		self.output_view = self.window.create_output_panel('tm')
 
 		self.output_view.run_command('append', {
 			'characters': output, 
-			'force': True, 
-			'scroll_to_end': True
+			'force': True
 		})
+		self.output_view.set_syntax_file('Assets/tmResult.sublime-syntax')
+		
 		self.window.run_command("show_panel", {"panel": "output.tm"})
-
-
- 

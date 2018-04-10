@@ -1,7 +1,10 @@
 [
   {
     "caption": "Thulium: Tokenize",
-    "command": "tm_tokenize"
+    "command": "tm_execute",
+    "args": {
+      "meta": "-t"
+    },
   },
   {
     "caption": "Thulium: Set Kernel Path",

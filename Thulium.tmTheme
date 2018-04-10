@@ -590,9 +590,9 @@
 			</dict>
 		</dict>
 
-	<!--Thulium Music Style Sheet-->
+	<!-- Thulium Music -->
 
-	<!--  Note  -->
+	  <!--  Note  -->
 
 		<dict>
 			<key>scope</key>
@@ -631,7 +631,7 @@
 			</dict>
 		</dict>
 
-	<!--  Function  -->
+	  <!--  Function  -->
 
 		<dict>
 			<key>scope</key>
@@ -672,7 +672,7 @@
 			</dict>
 		</dict>
 
-	<!--  Track  -->
+	  <!--  Track  -->
 
 		<dict>
 			<key>scope</key>
@@ -733,7 +733,7 @@
 			</dict>
 		</dict>
 
-	<!--  Meta  -->
+	  <!--  Meta  -->
 
 		<dict>
 			<key>scope</key>
@@ -776,7 +776,7 @@
 			</dict>
 		</dict>
 
-	<!--  Command  -->
+	  <!--  Command  -->
 
 		<dict>
 			<key>scope</key>
@@ -819,7 +819,7 @@
 			</dict>
 		</dict>
 
-	<!--  Number  -->
+	  <!--  Number  -->
 
 		<dict>
 			<key>scope</key>
@@ -849,7 +849,7 @@
 			</dict>
 		</dict>
 
-	<!--  Library  -->
+	  <!--  Library  -->
 
 		<dict>
 			<key>scope</key>
@@ -872,7 +872,7 @@
 			</dict>
 		</dict>
 
-	<!--  Shorthand  -->
+	  <!--  Shorthand  -->
 
 		<dict>
 			<key>scope</key>
@@ -930,7 +930,7 @@
 			</dict>
 		</dict>
 
-	<!--  Comment  -->
+	  <!--  Comment  -->
 
 		<dict>
 			<key>scope</key>
@@ -972,8 +972,6 @@
 				<string>#B0A0A0</string>
 			</dict>
 		</dict>
-
-		<!--End of Thulium Music Style Sheet-->
 
 	</array>
 </dict>

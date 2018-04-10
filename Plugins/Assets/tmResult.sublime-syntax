@@ -7,7 +7,29 @@ hidden: true
 
 contexts:
 
-  main:
-    - match: '^  Tokenize Result:'
-      scope: comment.tmResult
+  prototype: 
+    - match: '-'
+      scope: constant.character.tmResult
+    - match: ':'
+      scope: punctuation.separator.tmResult
 
+  main:
+    # - match: '^  Tokenize Result.*'
+    #   scope: string.unquoted.tmResult
+    - match: ^  (-)([\w ]+)(:)?
+      captures:
+        1: constant.character.tmResult
+        2: support.class.tmResult
+        3: punctuation.separator.tmResult
+      push: class
+      # entity.other.attribute-name
+      # scope: storage.type.keywords.tmResult
+
+  class:
+    - match: ^(?! {4})
+      pop: true
+    - match: (?:([\w ]+)(:))?([\w ]*)$
+      captures:
+        1: string.unquoted.tmResult
+        2: punctuation.separator.tmResult
+        3: variable.parameter.tmResult

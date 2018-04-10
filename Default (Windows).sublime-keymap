@@ -40,6 +40,6 @@
   },
   {
     "keys": ["ctrl+q"],
-    "command": "tm_tokenize"
+    "command": "tm_execute"
   }
 ]

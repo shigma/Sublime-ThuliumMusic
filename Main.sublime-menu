@@ -1,0 +1,28 @@
+[
+  {
+    "caption": "Tools",
+    "mnemonic": "T",
+    "id": "tools",
+    "children": [
+      {
+        "id": "thulium",
+        "caption": "Thulium",
+        "children": [
+          {
+            "id": "tmSetKernelPath",
+            "caption": "Set Kernel Path",
+            "command": "tm_set_kernel_path"
+          },
+          {
+            "caption": "-",
+          },
+          {
+            "id": "tmTokenize",
+            "caption": "Tokenize",
+            "command": "tm_execute"
+          }
+        ]
+      }
+    ]
+  }
+]

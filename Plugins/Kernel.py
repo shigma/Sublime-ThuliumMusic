@@ -14,7 +14,8 @@ class tmSetKernelPathCommand(sublime_plugin.WindowCommand):
             self.config = json.loads(file.read())
         initial = self.config.get('Kernel', default)
         self.input_view = self.window.show_input_panel(caption, initial, self.on_done, None, None)
-        self.input_view.set_syntax_file('Assets/tmPath.sublime-syntax')
+        self.input_view.set_syntax_file('tmPath.sublime-syntax')
+        self.input_view.settings().set("gutter", False)
 
     def on_done(self, string):
         if os.path.isdir(string):

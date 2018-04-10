@@ -31,6 +31,15 @@ class tmTokenizeCommand(sublime_plugin.WindowCommand):
 			'characters': output, 
 			'force': True
 		})
-		self.output_view.set_syntax_file('Assets/tmResult.sublime-syntax')
-		
+		self.output_view.set_syntax_file('tmResult.sublime-syntax')
+		self.output_view.set_read_only(True)
+		self.output_view.set_scratch(True)
+		output_settings = self.output_view.settings()
+		output_settings.set("gutter", True)
+		output_settings.set("line_numbers", False)
+		output_settings.set("margin", 2)
+		output_settings.set("fold_buttons", True)
+		output_settings.set("fade_fold_buttons", True)
+		output_settings.set("draw_white_space", "none")
+
 		self.window.run_command("show_panel", {"panel": "output.tm"})

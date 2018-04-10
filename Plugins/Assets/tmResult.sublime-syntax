@@ -8,13 +8,6 @@ hidden: true
 contexts:
 
   main:
-    - match: ^  Tokenize Result
+    - match: '^  Tokenize Result:'
       scope: comment.tmResult
 
-  Tokenize:
-    - match: '>.+'
-      scope: comment.tmPath
-    - match: '[:/\\]'
-      scope: keyword.operator.tmPath
-    - match: .
-      scope: entity.name.filename.tmPath

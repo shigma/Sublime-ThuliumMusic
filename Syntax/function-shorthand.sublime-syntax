@@ -3,6 +3,8 @@
 
 scope: shorthand.function.Thulium
 
+hidden: true
+
 contexts:
 
   main:

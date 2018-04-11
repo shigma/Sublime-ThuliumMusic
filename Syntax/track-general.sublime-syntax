@@ -3,6 +3,8 @@
 
 scope: track.Thulium
 
+hidden: true
+
 variables:
   span: '\d+(~\d+)?'
 

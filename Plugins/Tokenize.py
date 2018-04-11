@@ -11,6 +11,7 @@ def isThuliumFile(filename):
 		return False
 
 class tmExecuteCommand(sublime_plugin.WindowCommand):
+
 	def run(self, meta = ''):
 		self.sheet_view = self.window.active_sheet().view()
 		if not self.sheet_view: 
@@ -50,6 +51,7 @@ class tmExecuteCommand(sublime_plugin.WindowCommand):
 		self.output_view.set_scratch(True)
 		output_settings = self.output_view.settings()
 		output_settings.set("gutter", False)
+		output_settings.set("show_definitions", False)
 		output_settings.set("draw_white_space", "none")
 
 		self.window.run_command("show_panel", {"panel": "output.tm"})

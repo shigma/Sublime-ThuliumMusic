@@ -14,22 +14,29 @@ contexts:
       scope: punctuation.separator.tmResult
 
   main:
-    # - match: '^  Tokenize Result.*'
-    #   scope: string.unquoted.tmResult
+    - meta_include_prototype: false
+    - match: 'Finished in (\d+ms)'
+      captures:
+        1: entity.name.class.tmResult
+    - match: '(\d+) (error|warning)\(s\)'
+      captures:
+        1: entity.name.class.tmResult
     - match: ^  (-)([\w ]+)(:)?
       captures:
         1: constant.character.tmResult
         2: support.class.tmResult
         3: punctuation.separator.tmResult
-      push: class
-      # entity.other.attribute-name
-      # scope: storage.type.keywords.tmResult
+      push: item
 
-  class:
+  item:
     - match: ^(?! {4})
       pop: true
-    - match: (?:([\w ]+)(:))?([\w ]*)$
-      captures:
-        1: string.unquoted.tmResult
-        2: punctuation.separator.tmResult
-        3: variable.parameter.tmResult
+    - match: ([\w ]+)(?=:)
+      scope: string.unquoted.tmResult
+      push: subitem
+
+  subitem:
+    - match: $
+      pop: true
+    # - match: .+
+    #   scope: variable.parameter.tmResult

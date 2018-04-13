@@ -27,7 +27,7 @@ try {
   );
 
   const input = process.argv.slice(2);
-  const result = new Tokenizer(input[0], 'URL').toJSON('All');
+  const result = new Tokenizer(input[0], 'URL').fullForm();
   const EndTime = Date.now();
 
   const output = `\
@@ -39,17 +39,22 @@ try {
     - ` : ``}${line.trim()}`
     ).join('')}
 
-  - Declaration: ${result.Library.
-    find(lib => lib.Type === 'Function').Dict[0].Name}
   - Instruments: ${unimap(result.Sections, sect => {
     return unimap(sect.Tracks, track => {
       return unimap(track.Instruments, inst => inst.Name);
     });
   }).join(', ')}
   ${result.Sections.map(sect => `
-  - Section: ${sect.Comment[0].match(/-*(.*([^\-]))-*/)[1].trim()}
+  - Section: \
+    ${sect.Comment.length > 0 ? `
+    - Name: ${sect.Comment[0].match(/-*(.*([^\-]))-*/)[1].trim()}` : ``}
     - Tracks: ${sect.Tracks.filter(track => track.Play).length}`
-  ).join('\n')}`;
+  ).join('\n')}\
+  ${result.Errors.length > 0 ? `
+  - Errors: ${result.Errors}` : ``}\
+  ${result.Warnings.length > 0 ? `
+  - Warnings: ${result.Warnings}` : ``}
+  `;
 
   console.log(output);
 

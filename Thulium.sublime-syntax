@@ -58,7 +58,7 @@ contexts:
     # bracket: 尖括号
     # name: 音轨名
     # instrument: 乐器声明
-    - match: <:?(?=[a-zA-Z>])
+    - match: <:?(?=[a-zA-Z\s])
       scope: bracket.track.Thulium
       push: track.meta
     - match: :?>
@@ -85,9 +85,8 @@ contexts:
 
     - match: '[a-zA-Z]\w*'
       scope: instrument.track.Thulium
-      push: track-general.sublime-syntax
-      with_prototype: 
+      push: 
         - match: (?=[,>])
           pop: true
-
+        - include: track-general.sublime-syntax
 

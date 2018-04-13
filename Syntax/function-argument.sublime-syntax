@@ -8,6 +8,8 @@ hidden: true
 contexts:
 
   main:
+    - match: (?=\))
+      pop: true
     - include: function.argument
 
   function.argument:

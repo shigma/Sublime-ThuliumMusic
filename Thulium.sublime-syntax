@@ -35,6 +35,7 @@ contexts:
     - match: ^//
       scope: marker.comment.Thulium
       push:
+        - meta_scope: meta.comment.Thulium
         - match: (-{2,})(?=.+-{2,})
           scope: marker.comment.Thulium
           push: 

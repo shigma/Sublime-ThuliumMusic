@@ -20,14 +20,14 @@ try {
   
   const StartTime = Date.now();
   const KernelPath = path.join(tm.Kernel + '/Library');
-  const Tokenizer = require(KernelPath + '/Token/Tokenizer');
+  const Thulium = require(KernelPath + '/Thulium');
   const InstList = [].concat(
     Object.keys(require(KernelPath + '/Config/Instrument.json')),
     Object.keys(require(KernelPath + '/Config/Percussion.json'))
   );
 
   const input = process.argv.slice(2);
-  const result = new Tokenizer(input[0], 'URL').fullForm();
+  const result = new Thulium(input[0]);
   const EndTime = Date.now();
 
   const output = `\
@@ -45,8 +45,7 @@ try {
     });
   }).join(', ')}
   ${result.Sections.map(sect => `
-  - Section: \
-    ${sect.Comment.length > 0 ? `
+  - Section: ${sect.Comment.length > 0 ? `
     - Name: ${sect.Comment[0].match(/-*(.*([^\-]))-*/)[1].trim()}` : ``}
     - Tracks: ${sect.Tracks.filter(track => track.Play).length}`
   ).join('\n')}\

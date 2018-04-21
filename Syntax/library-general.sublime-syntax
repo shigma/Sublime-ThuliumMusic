@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 
-scope: library.Thulium
+scope: meta.library.Thulium
 
 hidden: true
 
@@ -52,6 +52,13 @@ contexts:
         - match: ^#
           scope: marker.command.Thulium
           pop: true
+    - match: '[Ss]ettings'
+      scope: keyword.command.Thulium
+      push: library.settings
+      with_prototype:
+        - match: ^#
+          scope: marker.command.Thulium
+          pop: true
     - match: '\S+(?=[ \t])'
       scope: invalid.command.Thulium
     - match: $
@@ -85,3 +92,16 @@ contexts:
       captures:
         1: operator.number.Thulium
         2: unsigned.number.Thulium
+
+  library.settings:
+    - meta_scope: meta.settings.Thulium
+    - match: '^[ -]*[a-zA-Z]\w*'
+      scope: storage.type.Thulium
+      push: 
+        - meta_scope: meta.value.settings.Thulium
+        - match: $
+          pop: true
+        - match: '[a-zA-Z]\w*'
+          scope: string.unquoted.Thulium
+        - match: (\d|[Aa]utomatic|[Tt]rue|[Ff]alse)
+          scope: constant.language.Thulium

@@ -9,7 +9,7 @@ contexts:
 
   main:
     - match: '>.+'
-      scope: comment.tmPath
+      scope: comment.line.tmPath
     - match: '[:/\\]'
       scope: keyword.operator.tmPath
     - match: .

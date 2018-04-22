@@ -1,5 +1,5 @@
 {
-	"scope": "include.Thulium",
+	"scope": "meta.include.Thulium",
 	"completions": [
         {
             "trigger": "Ammonia",

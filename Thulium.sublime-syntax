@@ -1,15 +1,6 @@
 %YAML 1.2
 ---
 
-# 基本类型
-  # comment: 注释
-  # command: 命令
-  # library: 库
-  # number: 数字
-  # function: 函数
-  # track: 音轨
-  # note: 音符
-
 name: Thulium Music
 
 file_extensions:
@@ -21,39 +12,120 @@ scope: source.Thulium
 contexts:
 
   main:
-    # 注释
-    - include: comment
-    # 命令
-    - include: command
-    # 音轨
-    - include: track
+    - include: comment  # 注释
+    - include: command  # 命令
+    - include: track    # 音轨
 
   comment:
-    # marker: 注释前的//号
-    # section: 乐章名称
-    # default: 默认注释信息
+    # 行注释，使用双斜杠声明
     - match: ^//
-      scope: marker.comment.Thulium
+      scope: comment.line.Thulium
       push:
         - meta_scope: meta.comment.Thulium
-        - match: (-{2,})(?=.+-{2,})
-          scope: marker.comment.Thulium
+        - match: (-{3,})(?=.+-{3,}$)
+          scope: comment.line.Thulium
           push: 
-            - match: -{2,}
-              scope: marker.comment.Thulium
+            - match: -{3,}$
+              scope: comment.line.Thulium
+              pop: true
             - match: .+(?!-|$)
-              scope: section.comment.Thulium
+              scope: entity.other.inherited-class section.name.Thulium
         - match: \S+
-          scope: default.comment.Thulium
+          scope: comment.line.Thulium
       with_prototype: 
         - match: $
           pop: true
 
   command:
-    # Syntax/Library.sublime-syntax
+    # 内置命令，使用井号声明
     - match: ^#
-      scope: marker.command.Thulium
-      push: library-general.sublime-syntax
+      scope: keyword.operator.Thulium
+      push:
+        - meta_scope: meta.command.Thulium
+        - match: '[Ee]nd'
+          scope: keyword.declaration.Thulium
+        - match: '[Ii]nclude'
+          scope: keyword.declaration.Thulium
+          push:
+            - meta_scope: meta.include.Thulium
+            - match: $
+              pop: true
+            - include: library.include
+        - match: '[Cc]hord'
+          scope: keyword.command.Thulium
+          push:
+            - meta_scope: meta.chord.Thulium
+            - match: ^#
+              scope: keyword.operator.Thulium
+              pop: true
+            - include: library.chord
+        - match: '[Ff]unction'
+          scope: keyword.command.Thulium
+          push: JavaScript.sublime-syntax
+          with_prototype:
+            - match: ^#
+              scope: keyword.operator.Thulium
+              pop: true
+        - match: '[Ss]ettings'
+          scope: keyword.command.Thulium
+          push: library.settings
+          with_prototype:
+            - match: ^#
+              scope: keyword.operator.Thulium
+              pop: true
+        - match: '\S+(?=[ \t])'
+          scope: invalid.command.Thulium
+        - match: $
+          pop: true
+
+  library.include:
+    - match: '[a-zA-Z]\w*'
+      scope: string.unquoted package.name.Thulium
+    - match: \"
+      scope: string.quoted.single.Thulium
+      push: tmPath.sublime-syntax
+      with_prototype:
+        - match: \"
+          scope: string.quoted.single.Thulium
+          pop: true
+
+  library.chord:
+    - match: ^[a-zA-Z](?=[\n\t])
+      scope: variable.function library.chord.operator.Thulium
+      push: 
+        - match: \t+([^\t]+\t+)?
+          scope: comment.line.Thulium
+        - match: \[
+          scope: constant.language library.chord.bracket.Thulium
+          push:
+            - match: ($|\])
+              scope: constant.language library.chord.bracket.Thulium
+              pop: true
+            - match: '[+\-]?\d'
+              scope: variable.function library.chord.index.Thulium
+            - match: ':'
+              scope: constant.language library.chord.bracket.Thulium
+        - match: '[+\-]?\d'
+          scope: variable.function library.chord.index.Thulium
+        - match: ','
+          scope: constant.language library.chord.bracket.Thulium
+        - match: $
+          pop: true
+    - match: ^[^#\n\t].*
+      scope: invalid.library.Thulium
+  
+  library.settings:
+    - meta_scope: meta.settings.Thulium
+    - match: '^[ -]*[a-zA-Z]\w*'
+      scope: storage.type.Thulium
+      push: 
+        - meta_scope: meta.value.settings.Thulium
+        - match: $
+          pop: true
+        - match: '[a-zA-Z]\w*'
+          scope: string.unquoted.Thulium
+        - match: (\d|[Aa]utomatic|[Tt]rue|[Ff]alse)
+          scope: constant.language.Thulium
 
   track:
     # bracket: 尖括号

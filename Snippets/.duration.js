@@ -1,8 +1,6 @@
 const fs = require('fs');
 
-const DurationDict = [-3, -2, -1, 0, 1, 2, 3];
-
-for (const key of DurationDict) {
+for (const key of [-2, -1, 0, 1, 2]) {
   const filename = `${__dirname}/dist/Dur-${key}.sublime-snippet`;
   const content = `<snippet>
     <content>

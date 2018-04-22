@@ -1,9 +1,9 @@
 <snippet>
-  <content>
-  	<![CDATA[-------------------- Section Q --------------------
+    <content>
+      <![CDATA[-------------------- Section Q --------------------
 $0]]>
-  </content>
-  <tabTrigger>sq</tabTrigger>
-  <scope>meta.comment.Thulium</scope>
-  <description>Section Q</description>
-</snippet>
+    </content>
+    <tabTrigger>secq</tabTrigger>
+    <scope>meta.comment.Thulium</scope>
+    <description>Section Q</description>
+  </snippet>

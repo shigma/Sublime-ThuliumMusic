@@ -3,6 +3,6 @@
   		<![CDATA[Dur(1)$0]]>
     </content>
     <tabTrigger>d1</tabTrigger>
-    <scope>track.Thulium</scope>
+    <scope>meta.subtrack.Thulium</scope>
     <description>Dur(1)</description>
   </snippet>

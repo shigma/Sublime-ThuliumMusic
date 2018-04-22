@@ -7,7 +7,7 @@ for (let i = 1; i <= 26; i++) {
     <content>
       <![CDATA[-------------------- Section ${upper} --------------------\n$0]]>
     </content>
-    <tabTrigger>s${lower}</tabTrigger>
+    <tabTrigger>sec${lower}</tabTrigger>
     <scope>meta.comment.Thulium</scope>
     <description>Section ${upper}</description>
   </snippet>`;

@@ -3,6 +3,6 @@
   	  <![CDATA[(1=bbB)$0]]>
     </content>
     <tabTrigger>kbbb</tabTrigger>
-    <scope>track.Thulium</scope>
+    <scope>meta.subtrack.Thulium</scope>
     <description>(1=bbB)</description>
   </snippet>

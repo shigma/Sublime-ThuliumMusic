@@ -4,6 +4,6 @@
 $0]]>
       </content>
       <tabTrigger>r64</tabTrigger>
-      <scope>track.Thulium</scope>
+      <scope>meta.subtrack.Thulium</scope>
       <description>Rest(6, 4)</description>
     </snippet>

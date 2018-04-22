@@ -14,7 +14,7 @@ for (const key in TonalityDict) {
   	  <![CDATA[(1=${value})$0]]>
     </content>
     <tabTrigger>k${key}</tabTrigger>
-    <scope>track.Thulium</scope>
+    <scope>meta.subtrack.Thulium</scope>
     <description>(1=${value})</description>
   </snippet>`;
   fs.writeFileSync(filename, content, {encoding: 'utf8'});

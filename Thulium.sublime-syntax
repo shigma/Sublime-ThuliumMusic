@@ -11,7 +11,7 @@ scope: source.Thulium
 
 variables:
   span: \d+(~\d+)?
-  expr: (\d+([./]\d+)?|Log2\(\d+\)([+\-]\d+)?)
+  expr: (?:\d+(?:[./]\d+)?|Log2\(\d+\)(?:[+\-]\d+)?)
 
 contexts:
 
@@ -152,17 +152,17 @@ contexts:
           push: 
             - match: (?=[,>])
               pop: true
-            - include: subtrack
+            - include: track.content
     - match: :?>
       scope: entity.name track.bracket.Thulium
       pop: true
     - match: (?=.)
-      push: subtrack
+      push: track.content
       with_prototype:
         - match: $\s*^
           pop: true
 
-  subtrack.comment:
+  track.comment:
     # 音轨内注释
     - match:  <\*
       scope: marker.comment.Thulium
@@ -172,24 +172,20 @@ contexts:
           scope: marker.comment.Thulium
           pop: true
 
-  subtrack:
+  track.content:
     # 子音轨内容
     - meta_scope: meta.subtrack.Thulium
-    - include: subtrack.comment
+    - include: track.comment
     - include: package.index
+    - include: function.call
 
-    # 函数调用
-    - match: ([a-zA-Z][a-zA-Z\d]* *)(\()
-      captures:
-        1: variable.parameter support.other.variable function.name.Thulium
-        2: variable.parameter support.other.variable function.bracket.Thulium
-      push: argument
+    # 冒号式调用
     - match: (\()([a-zA-Z][a-zA-Z\d]* *)(:)
       captures:
         1: variable.parameter support.other.variable function.bracket.Thulium
         2: variable.parameter support.other.variable function.name.Thulium
         3: variable.parameter support.other.variable function.bracket.Thulium
-      push: argument
+      push: function.argument
 
     # 反复与小节线
     - match: DC|DS|Coda|ToCoda|DaCapo|DaSegno|Fine|!|s|\+
@@ -217,17 +213,8 @@ contexts:
       scope: keyword.control markup.heading barline.Thulium
       
     # 音符与子音轨
-    - include: note.sublime-syntax
-    - match: (\{)(?:(\d+)(\*))?
-      captures:
-        1: keyword.control markup.heading subtrack.bracket.Thulium
-        2: constant.numeric subtrack.repeat.Thulium
-        3: constant.character subtrack.repeat.Thulium
-      push: 
-        - match: \}
-          scope: keyword.control markup.heading subtrack.bracket.Thulium
-          pop: true
-        - include: subtrack
+    - include: note
+    - include: subtrack
     - match: (@)([a-zA-Z0-9]+)
       captures:
         1: entity.name macrotrack.Thulium
@@ -243,27 +230,75 @@ contexts:
     - match: \d+(~\d+)?
       scope: constant.numeric volta.index.Thulium
 
-  argument:
+  subtrack:
+    - match: (\{)(?:(\d+)(\*))?
+      captures:
+        1: keyword.control markup.heading subtrack.bracket.Thulium
+        2: constant.numeric subtrack.repeat.Thulium
+        3: constant.character subtrack.repeat.Thulium
+      push: 
+        - match: \}
+          scope: keyword.control markup.heading subtrack.bracket.Thulium
+          pop: true
+        - include: track.content
+
+  note:
+    # 音符
+    - match: (?=[\[0-7%x])
+      push:
+        - meta_scope: meta.note.Thulium
+        - match: \[
+          scope: variable.annotation bracket.note.Thulium
+          push:
+            - include: pitch
+            - match: \]
+              scope: variable.annotation bracket.note.Thulium
+              pop: true
+        - include: pitch
+        - match: ([#',b])
+          scope: variable.annotation pitchdop.note.Thulium
+        - match: ([>:._=\-`])
+          scope: variable.annotation durvolop.note.Thulium
+        - match: (?=.)
+          pop: true
+
+  pitch:
+    # 音高 + 和弦 + 音量
+    - match: ([0-7%x])
+      scope: variable.annotation note.degree.Thulium
+      push: 
+        - match: ([#',a-wyzA-Z])
+          scope: variable.annotation pitchdop.note.Thulium
+        - match: ([:>])
+          scope: variable.annotation durvolop.note.Thulium
+        - match: (?=.)
+          pop: true
+
+  function.call:
+    # 非简记调用
+    - match: ([a-zA-Z][a-zA-Z\d]* *)(\()
+      captures:
+        1: variable.parameter support.other.variable function.name.Thulium
+        2: variable.parameter support.other.variable function.bracket.Thulium
+      push: function.argument
+
+  function.argument:
+    # 函数参数
+    - meta_scope: meta.argument.Thulium
     - match: \)
       scope: variable.parameter support.other.variable function.bracket.Thulium
       pop: true
     - match: ','
-      scope: punctuation.separator.sequence function.comma.Thulium
-    - include: number.sublime-syntax
-    - match: \{(\d+\*)?
-      scope: subtrack.track.Thulium
-      push:
-        - match: \}
-          scope: subtrack.track.Thulium
-          pop: true
-        - include: subtrack
+      scope: variable.parameter support.other.variable function.comma.Thulium
+    - include: expression
+    - include: subtrack
     - match: \[
-      scope: bracket.function.Thulium
+      scope: variable.parameter support.other.variable function.bracket.Thulium
       push: 
         - match: \]
-          scope: bracket.function.Thulium
+          scope: variable.parameter support.other.variable function.bracket.Thulium
           pop: true
-        - include: argument
+        - include: function.argument
     - match: \"
       scope: bracket.function.Thulium
       push: 
@@ -275,12 +310,27 @@ contexts:
         - match: .
           scope: number.expression.Thulium
 
+  expression:
+    - meta_scope: meta.expression.Thulium
+    - match: \)
+      scope: variable.parameter support.other.variable expression.bracket.Thulium
+      pop: true
+    - match: ([+\-\*/])
+      scope: keyword.operator.Thulium
+    - match: \d+(\.\d+)?
+      scope: constant.numeric.Thulium
+    - include: function.call
+    - match: \(
+      scope: variable.parameter support.other.variable expression.bracket.Thulium
+      push: expression
+
   package.index:
     # 各种官方包
     - include: package.ammonia
+    - include: package.benzene
 
   package.ammonia:
-    - match: (\$|~|&|\*)
+    - match: (\$|~|&|\*|\^)
       scope: variable.parameter support.other.variable alias.identifier.Thulium
 
     # Key
@@ -298,7 +348,7 @@ contexts:
         - match: \)
           scope: variable.parameter support.other.variable alias.identifier.Thulium
           pop: true
-        - include: Note.sublime-syntax
+        - include: note
 
     # GraceNote
     - match: \((?=[\[\]a-zA-Z0-7x%#',:>=\-\.`_]*\^\))
@@ -308,7 +358,7 @@ contexts:
         - match: \^\)
           scope: variable.parameter support.other.variable alias.identifier.Thulium
           pop: true
-        - include: Note.sublime-syntax
+        - include: note
 
     # Vol
     - match: (\()(\d+\.?\d*)(%\))
@@ -348,9 +398,14 @@ contexts:
         3: variable.parameter support.other.variable alias.identifier.Thulium
 
     # Tremolo
-    - match: (\()({{expr}})([=\-]\))
-      captures:
-        1: variable.parameter support.other.variable alias.identifier.Thulium
-        2: meta.alias.Tremolo.Thulium constant.numeric.Thulium
-        3: variable.parameter support.other.variable alias.identifier.Thulium
+    - match: \((?={{expr}}[=\-]\))
+      scope: variable.parameter support.other.variable alias.identifier.Thulium
+      push: 
+        - match: ([=\-]\))
+          scope: variable.parameter support.other.variable alias.identifier.Thulium
+          pop: true
+        - include: function.argument
 
+  package.benzene:
+    - match: (\$~|\?=|\?:)
+      scope: variable.parameter support.other.variable alias.identifier.Thulium

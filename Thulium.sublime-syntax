@@ -9,6 +9,9 @@ file_extensions:
 
 scope: source.Thulium
 
+variables:
+  span: \d+(~\d+)?
+
 contexts:
 
   main:
@@ -22,6 +25,10 @@ contexts:
       scope: comment.line.Thulium
       push:
         - meta_scope: meta.comment.Thulium
+        - match: $
+          pop: true
+
+        # 分割线中央的字段被认为是乐章名
         - match: (-{3,})(?=.+-{3,}$)
           scope: comment.line.Thulium
           push: 
@@ -32,9 +39,6 @@ contexts:
               scope: entity.other.inherited-class section.name.Thulium
         - match: \S+
           scope: comment.line.Thulium
-      with_prototype: 
-        - match: $
-          pop: true
 
   command:
     # 内置命令，使用井号声明
@@ -42,23 +46,16 @@ contexts:
       scope: keyword.operator.Thulium
       push:
         - meta_scope: meta.command.Thulium
+        - match: $
+          pop: true
         - match: '[Ee]nd'
           scope: keyword.declaration.Thulium
         - match: '[Ii]nclude'
           scope: keyword.declaration.Thulium
-          push:
-            - meta_scope: meta.include.Thulium
-            - match: $
-              pop: true
-            - include: library.include
+          push: library.include
         - match: '[Cc]hord'
           scope: keyword.command.Thulium
-          push:
-            - meta_scope: meta.chord.Thulium
-            - match: ^#
-              scope: keyword.operator.Thulium
-              pop: true
-            - include: library.chord
+          push: library.chord
         - match: '[Ff]unction'
           scope: keyword.command.Thulium
           push: JavaScript.sublime-syntax
@@ -69,16 +66,13 @@ contexts:
         - match: '[Ss]ettings'
           scope: keyword.command.Thulium
           push: library.settings
-          with_prototype:
-            - match: ^#
-              scope: keyword.operator.Thulium
-              pop: true
         - match: '\S+(?=[ \t])'
           scope: invalid.command.Thulium
-        - match: $
-          pop: true
 
   library.include:
+    - meta_scope: meta.include.Thulium
+    - match: $
+      pop: true
     - match: '[a-zA-Z]\w*'
       scope: string.unquoted package.name.Thulium
     - match: \"
@@ -90,32 +84,40 @@ contexts:
           pop: true
 
   library.chord:
+    - meta_scope: meta.chord.Thulium
+    - match: ^#
+      scope: keyword.operator.Thulium
+      pop: true
     - match: ^[a-zA-Z](?=[\n\t])
       scope: variable.function library.chord.operator.Thulium
       push: 
         - match: \t+([^\t]+\t+)?
           scope: comment.line.Thulium
         - match: \[
-          scope: constant.language library.chord.bracket.Thulium
+          scope: constant.character library.chord.bracket.Thulium
           push:
             - match: ($|\])
-              scope: constant.language library.chord.bracket.Thulium
+              scope: constant.character library.chord.bracket.Thulium
               pop: true
             - match: '[+\-]?\d'
               scope: variable.function library.chord.index.Thulium
             - match: ':'
-              scope: constant.language library.chord.bracket.Thulium
+              scope: constant.character library.chord.tooperator.Thulium
         - match: '[+\-]?\d'
           scope: variable.function library.chord.index.Thulium
         - match: ','
-          scope: constant.language library.chord.bracket.Thulium
+          scope: constant.character library.chord.comma.Thulium
         - match: $
           pop: true
     - match: ^[^#\n\t].*
       scope: invalid.library.Thulium
   
   library.settings:
+    # 这部分规范未确定
     - meta_scope: meta.settings.Thulium
+    - match: ^#
+      scope: keyword.operator.Thulium
+      pop: true
     - match: '^[ -]*[a-zA-Z]\w*'
       scope: storage.type.Thulium
       push: 
@@ -128,38 +130,159 @@ contexts:
           scope: constant.language.Thulium
 
   track:
-    # bracket: 尖括号
-    # name: 音轨名
-    # instrument: 乐器声明
+    # 音轨主体
     - match: <:?(?=[a-zA-Z\s])
-      scope: bracket.track.Thulium
-      push: track.meta
+      scope: entity.name track.bracket.Thulium
+      push:
+        # 音轨头
+        - meta_scope: meta.track.Thulium
+        - match: (?=:?>)
+          pop: true
+        # 音轨名
+        - match: ([a-zA-Z]\w*)(:)
+          captures:
+            1: entity.other.inherited-class track.name.Thulium
+            2: entity.name track.colon.Thulium
+        - match: ','
+          scope: entity.name track.comma.Thulium
+        # 乐器名
+        - match: '[a-zA-Z]\w*'
+          scope: string.unquoted track.instrument.Thulium
+          push: 
+            - match: (?=[,>])
+              pop: true
+            - include: subtrack
     - match: :?>
-      scope: bracket.track.Thulium
+      scope: entity.name track.bracket.Thulium
       pop: true
     - match: (?=.)
-      push: track-general.sublime-syntax
+      push: subtrack
       with_prototype:
         - match: $\s*^
           pop: true
 
-  track.meta:
-    - meta_scope: meta.track.Thulium
-    - match: (?=:?>)
-      scope: bracket.track.Thulium
-      pop: true
-    - match: '(:)?([a-zA-Z]\w*)(:)'
-      captures:
-        1: bracket.track.Thulium
-        2: name.track.Thulium
-        3: bracket.track.Thulium
-    - match: ','
-      scope: bracket.track
-
-    - match: '[a-zA-Z]\w*'
-      scope: instrument.track.Thulium
+  subtrack.comment:
+    # 音轨内注释
+    - match:  <\*
+      scope: marker.comment.Thulium
       push: 
-        - match: (?=[,>])
+        - meta_scope: track.comment.Thulium
+        - match: \*>
+          scope: marker.comment.Thulium
           pop: true
-        - include: track-general.sublime-syntax
+
+  subtrack:
+    - meta_scope: meta.track.Thulium
+    - include: subtrack.comment
+    - match: \)
+      scope: constant.character function.bracket.Thulium
+    - match: ([a-zA-Z][a-zA-Z\d]* *)(\()
+      captures:
+        1: keyword.other function.name.Thulium
+        2: constant.character function.bracket.Thulium
+      push: function.argument
+    - match: \(
+      scope: bracket.function.Thulium
+      push:
+        # name: 函数名
+        # identifier: 简记法标识符
+        # bracket: 函数括号
+        - meta_scope: alias.function.Thulium
+        - match: (?=\))
+          scope: bracket.function.Thulium
+          pop: true
+        - match: '([a-zA-Z]\w*)(:)'
+          captures:
+            1: name.function.Thulium
+            2: bracket.function.Thulium
+          push: function.argument
+        - include: package-standard.sublime-syntax
+
+    - match: '[~$]'
+      scope: identifier.function.Thulium
+    - match: '[!&*\^+s]'
+      scope: operator.track.Thulium
+
+    - match: '(\|)(\|:)'
+      captures:
+        1: barline.track.Thulium
+        2: barline-plain.track.Thulium
+    - match: '(:?\|)(\|)'
+      captures:
+        1: barline-plain.track.Thulium
+        2: barline.track.Thulium
+    - match: (\{)(?:(\d+)(\*))?
+      captures:
+        1: subtrack.track.Thulium
+        2: repeat-number.track.Thulium
+        3: repeat.track.Thulium
+      push: 
+        - match: \}
+          scope: subtrack.track.Thulium
+          pop: true
+        - include: track.general
+    - match: '[\|/]'
+      scope: barline.track.Thulium
+    - match: \\(?=({{span}}(,{{span}})*)?:)
+      scope: barline.track.Thulium
+      push: 
+        - match: ':'
+          scope: repeat.track.Thulium
+          pop: true
+        - match: '[~,]'
+          scope: repeat.track.Thulium
+        - match: \d+
+          scope: repeat-number.track.Thulium
+    - match: \[(?=({{span}}\.)+\])
+      scope: barline.track.Thulium
+      push: 
+        - match: \]
+          scope: barline.track.Thulium
+          pop: true
+        - match: '[~\.]'
+          scope: repeat.track.Thulium
+        - match: \d+
+          scope: repeat-number.track.Thulium
+    - match: DC|DS|Coda|ToCoda|DaCapo|DaSegno|Fine
+      scope: operator.track
+      
+    - match: '(@)([a-zA-Z]\w*)'
+      captures:
+        1: punctuation.track.Thulium
+        2: name.track.Thulium
+    - include: note.sublime-syntax
+
+  function.argument:
+    - match: (?=\))
+      pop: true
+    - match: (?=[;\)])
+      pop: true
+    - match: ','
+      scope: bracket.function.Thulium
+    - include: number.sublime-syntax
+    - match: \{(\d+\*)?
+      scope: subtrack.track.Thulium
+      push:
+        - match: \}
+          scope: subtrack.track.Thulium
+          pop: true
+        - include: subtrack
+    - match: \[
+      scope: bracket.function.Thulium
+      push: 
+        - match: \]
+          scope: bracket.function.Thulium
+          pop: true
+        - include: function.argument
+    - match: \"
+      scope: bracket.function.Thulium
+      push: 
+        - match: \"
+          scope: bracket.function.Thulium
+          pop: true
+        - match: \\.
+          scope: number.expression.Thulium
+        - match: .
+          scope: number.expression.Thulium
+
 

@@ -3,11 +3,11 @@
 	"completions": [
         {
             "trigger": "Ammonia",
-            "contents": "Ammonia"
+            "contents": "Ammonia\n"
         },
         {
             "trigger": "Benzene",
-            "contents": "Benzene"
+            "contents": "Benzene\n"
         },
 	]
 }

@@ -78,7 +78,7 @@ contexts:
       scope: string.unquoted package.name.Thulium
     - match: \"
       scope: string.quoted.single.Thulium
-      push: tmPath.sublime-syntax
+      push: Thulium-path.sublime-syntax
       with_prototype:
         - match: \"
           scope: string.quoted.single.Thulium

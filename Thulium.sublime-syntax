@@ -64,6 +64,13 @@ contexts:
             - match: ^#
               scope: keyword.operator.Thulium
               pop: true
+        - match: '[Nn]otation'
+          scope: keyword.command.Thulium
+          push: JavaScript.sublime-syntax
+          with_prototype:
+            - match: ^#
+              scope: keyword.operator.Thulium
+              pop: true
         - match: '[Ss]ettings'
           scope: keyword.command.Thulium
           push: library.settings
@@ -152,6 +159,13 @@ contexts:
           push: 
             - match: (?=[,>])
               pop: true
+            - match: (\[)([a-zA-Z])(=)?([1-7])?(\])
+              captures:
+                1: entity.name track.macro.bracket.Thulium
+                2: entity.name track.macro.name.Thulium
+                3: entity.name track.macro.assignment.Thulium
+                4: variable.annotation track.macro.note.Thulium
+                5: entity.name track.macro.bracket.Thulium
             - include: track.content
     - match: :?>
       scope: entity.name track.bracket.Thulium
